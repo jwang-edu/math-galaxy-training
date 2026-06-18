@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Math Galaxy 星际演算舱</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="space-grid" aria-hidden="true"></div>
+    <section id="userScreen" class="user-screen hidden" aria-labelledby="user-screen-title">
+      <div class="user-gate">
+        <p class="eyebrow">Math Galaxy Crew Select</p>
+        <h1 id="user-screen-title">欢迎回到数学星际训练舱</h1>
+        <p>选择今天的数学飞行员</p>
+        <div id="userCards" class="user-cards"></div>
+      </div>
+    </section>
+
+    <div id="createUserModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="create-user-title">
+      <form id="createUserForm" class="create-user-card">
+        <div class="records-header">
+          <div>
+            <p class="eyebrow">New Pilot</p>
+            <h2 id="create-user-title">创建新飞行员</h2>
+          </div>
+          <button id="cancelCreateUser" class="icon-button" type="button" aria-label="关闭">×</button>
+        </div>
+        <label>
+          <span>名字</span>
+          <input id="newUserName" type="text" maxlength="12" required placeholder="输入名字">
+        </label>
+        <label>
+          <span>年级</span>
+          <select id="newUserGrade" required>
+            <option value="一年级">一年级</option>
+            <option value="二年级">二年级</option>
+            <option value="三年级">三年级</option>
+            <option value="四年级">四年级</option>
+            <option value="五年级">五年级</option>
+            <option value="六年级">六年级</option>
+            <option value="初一">初一</option>
+            <option value="初二">初二</option>
+            <option value="初三">初三</option>
+          </select>
+        </label>
+        <fieldset class="avatar-options" aria-label="选择头像">
+          <legend>头像</legend>
+          <label><input type="radio" name="newUserAvatar" value="🚀" checked><span>🚀</span></label>
+          <label><input type="radio" name="newUserAvatar" value="🪐"><span>🪐</span></label>
+          <label><input type="radio" name="newUserAvatar" value="🌙"><span>🌙</span></label>
+          <label><input type="radio" name="newUserAvatar" value="⭐"><span>⭐</span></label>
+          <label><input type="radio" name="newUserAvatar" value="🧠"><span>🧠</span></label>
+          <label><input type="radio" name="newUserAvatar" value="🦊"><span>🦊</span></label>
+          <label><input type="radio" name="newUserAvatar" value="🐱"><span>🐱</span></label>
+          <label><input type="radio" name="newUserAvatar" value="🐼"><span>🐼</span></label>
+          <label><input type="radio" name="newUserAvatar" value="🐯"><span>🐯</span></label>
+          <label><input type="radio" name="newUserAvatar" value="🤖"><span>🤖</span></label>
+        </fieldset>
+        <button id="saveUserButton" class="primary-button launch-button" type="submit">创建并开始训练</button>
+      </form>
+    </div>
+
+    <button id="recordsToggle" class="records-toggle" type="button">每日星图</button>
+    <main id="appShell" class="app-shell hidden">
+      <section class="practice-panel" aria-labelledby="app-title">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Math Galaxy / 数学星际训练舱</p>
+            <h1 id="app-title">Math Galaxy 星际演算舱</h1>
+            <div class="pilot-strip">
+              当前飞行员：<strong id="currentPilotText">🚀 默认飞行员｜未设置｜星星学徒</strong>
+              <span>🔥 <b id="streakDaysText">0</b> 天</span>
+              <button id="switchUserButton" class="ghost-button" type="button">切换用户</button>
+              <button id="editCurrentUserButton" class="ghost-button" type="button">编辑资料</button>
+            </div>
+          </div>
+          <div class="star-wallet growth-hud" aria-live="polite">
+            <div class="star-core">
+              <span class="star-icon" aria-hidden="true"></span>
+              <span id="starCount">0</span>
+              <small>累计星星</small>
+            </div>
+            <div class="growth-info">
+              <strong id="levelName">星星学徒</strong>
+              <span id="nextLevelText">距离下一等级还差 300 星</span>
+              <div class="level-track" aria-hidden="true">
+                <div id="levelProgressFill"></div>
+              </div>
+              <div class="growth-row">
+                <span>星尘 <b id="starDustCount">0</b></span>
+                <span id="weeklyGoalText">本周 0 / 1200</span>
+              </div>
+              <div class="weekly-track" aria-hidden="true">
+                <div id="weeklyProgressFill"></div>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <div class="stats-grid" aria-label="本轮练习进度">
+          <div>
+            <span class="stat-label">当前题号</span>
+            <strong id="progressText">0 / 50</strong>
+          </div>
+          <div>
+            <span class="stat-label">正确</span>
+            <strong id="correctText">0</strong>
+          </div>
+          <div>
+            <span class="stat-label">错误</span>
+            <strong id="wrongText">0</strong>
+          </div>
+          <div>
+            <span class="stat-label">正确率</span>
+            <strong id="accuracyText">0%</strong>
+          </div>
+          <div>
+            <span class="stat-label">Combo</span>
+            <strong id="comboText">0</strong>
+          </div>
+        </div>
+
+        <div class="progress-track" aria-hidden="true">
+          <div id="progressFill"></div>
+        </div>
+
+        <section id="welcomeScreen" class="welcome-screen">
+          <div class="hero-art" aria-hidden="true">
+            <div class="planet">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <div class="orbit-star orbit-star-one"></div>
+            <div class="orbit-star orbit-star-two"></div>
+          </div>
+          <h2>选择任务星球，启动训练</h2>
+          <p>不同题型有基础星，答得越快奖励越多；答错扣 1 颗星。完成后会自动保存今天的成绩。</p>
+          <fieldset class="category-list" id="categoryOptions" aria-label="题目类别"></fieldset>
+          <fieldset class="pill-options count-options" aria-label="题目数量">
+            <legend>题目数量</legend>
+            <label><input type="radio" name="questionCount" value="10"><span>10 题</span></label>
+            <label><input type="radio" name="questionCount" value="20"><span>20 题</span></label>
+            <label><input type="radio" name="questionCount" value="30"><span>30 题</span></label>
+            <label><input type="radio" name="questionCount" value="40"><span>40 题</span></label>
+            <label><input type="radio" name="questionCount" value="50" checked><span>50 题</span></label>
+            <label><input type="radio" name="questionCount" value="60"><span>60 题</span></label>
+            <label><input type="radio" name="questionCount" value="80"><span>80 题</span></label>
+            <label><input type="radio" name="questionCount" value="100"><span>100 题</span></label>
+          </fieldset>
+          <fieldset class="timer-options" aria-label="每题限时">
+            <legend>每题限时</legend>
+            <label>
+              <input type="radio" name="timerSeconds" value="10">
+              <span>10 秒</span>
+            </label>
+            <label>
+              <input type="radio" name="timerSeconds" value="20" checked>
+              <span>20 秒</span>
+            </label>
+            <label>
+              <input type="radio" name="timerSeconds" value="30">
+              <span>30 秒</span>
+            </label>
+            <label>
+              <input type="radio" name="timerSeconds" value="40">
+              <span>40 秒</span>
+            </label>
+          </fieldset>
+          <button id="startButton" class="primary-button launch-button" type="button">🚀 启动训练</button>
+        </section>
+
+        <section id="quizScreen" class="quiz-screen hidden" aria-live="polite">
+          <div class="quiz-topline">
+            <button id="backButton" class="ghost-button" type="button">返回任务舱</button>
+            <div class="quiz-orbit">
+              <span id="categoryBadge">类别</span>
+              <span id="questionNumber">第 1 题</span>
+            </div>
+          </div>
+          <div class="question-meta">
+            <span id="timerText">20 秒</span>
+          </div>
+          <div class="timer-track" aria-hidden="true">
+            <div id="timerFill"></div>
+          </div>
+          <div class="question-stage">
+            <div id="rewardBurst" class="reward-burst" aria-hidden="true"></div>
+            <div id="questionText" class="question-text">12 + 34 = ?</div>
+          </div>
+          <form id="answerForm" class="answer-form">
+            <label for="answerInput">答案</label>
+            <div class="answer-row">
+              <input id="answerInput" name="answer" type="number" inputmode="numeric" autocomplete="off" required>
+              <button class="primary-button" type="submit">提交</button>
+              <button id="nextButton" class="secondary-button hidden" type="button">下一题</button>
+            </div>
+          </form>
+          <p id="feedbackText" class="feedback-text" role="status"></p>
+        </section>
+
+        <section id="resultScreen" class="result-screen hidden">
+          <h2>本轮完成</h2>
+          <div class="result-number" id="finalScore">0 / 50</div>
+          <p id="finalMessage"></p>
+          <div class="settlement-panel">
+            <div class="settlement-header">
+              <span>星际结算</span>
+              <strong id="settlementTotal">+0 星</strong>
+            </div>
+            <div class="settlement-grid">
+              <div><span>本轮答对</span><strong id="settlementCorrect">0</strong></div>
+              <div><span>正确率</span><strong id="settlementAccuracy">0%</strong></div>
+              <div><span>基础星星</span><strong id="baseStarsText">0</strong></div>
+              <div><span>精准奖励</span><strong id="accuracyBonusText">0</strong></div>
+              <div><span>连击奖励</span><strong id="comboBonusText">0</strong></div>
+              <div><span>速度奖励</span><strong id="speedBonusText">0</strong></div>
+              <div><span>满分奖励</span><strong id="perfectBonusText">0</strong></div>
+            </div>
+            <div class="settlement-growth">
+              <span id="totalStarsAnimation">0 → 0</span>
+              <div class="level-track" aria-hidden="true">
+                <div id="resultLevelProgressFill"></div>
+              </div>
+              <small id="resultLevelText">星星学徒</small>
+            </div>
+          </div>
+          <div id="categorySummary" class="category-summary"></div>
+          <button id="restartButton" class="secondary-button" type="button">再练一轮</button>
+        </section>
+      </section>
+
+      <aside id="recordsPanel" class="records-panel" aria-labelledby="records-title">
+        <div class="records-header">
+          <div>
+            <p class="eyebrow">Daily Star Map</p>
+            <h2 id="records-title">每日星图</h2>
+          </div>
+          <button id="recordsClose" class="icon-button drawer-close" type="button" title="关闭星图" aria-label="关闭星图">×</button>
+          <button id="clearRecordsButton" class="icon-button" type="button" title="清空记录" aria-label="清空记录">
+            清
+          </button>
+        </div>
+        <div id="todaySummary" class="today-summary"></div>
+        <div id="recordsList" class="records-list"></div>
+      </aside>
+    </main>
+
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>
