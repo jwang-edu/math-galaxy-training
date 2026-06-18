@@ -1907,7 +1907,8 @@ button.solar-science-card {
 }
 
 .rarity-badge,
-.card-no {
+.card-no,
+.card-number {
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 999px;
   padding: 5px 9px;
@@ -1917,6 +1918,46 @@ button.solar-science-card {
   font-weight: 900;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+
+.rarity-badge {
+  min-width: 42px;
+  text-align: center;
+}
+
+.rarity-common {
+  color: #d7e8f7;
+  border-color: rgba(122, 167, 199, 0.62);
+  background: rgba(122, 167, 199, 0.16);
+  box-shadow: 0 0 14px rgba(122, 167, 199, 0.16);
+}
+
+.rarity-rare {
+  color: #d9ecff;
+  border-color: rgba(79, 140, 255, 0.76);
+  background: rgba(79, 140, 255, 0.18);
+  box-shadow: 0 0 16px rgba(79, 140, 255, 0.24);
+}
+
+.rarity-epic {
+  color: #efe4ff;
+  border-color: rgba(155, 92, 255, 0.78);
+  background: rgba(155, 92, 255, 0.18);
+  box-shadow: 0 0 18px rgba(155, 92, 255, 0.28);
+}
+
+.rarity-legendary {
+  color: #fff4c9;
+  border-color: rgba(255, 209, 102, 0.88);
+  background: rgba(255, 209, 102, 0.18);
+  box-shadow: 0 0 20px rgba(255, 209, 102, 0.34);
+}
+
+.card-number {
+  color: #b9c6e8;
+  border-color: rgba(185, 198, 232, 0.2);
+  background: rgba(11, 18, 48, 0.64);
+  box-shadow: inset 0 0 18px rgba(66, 232, 255, 0.05);
 }
 
 .card-image-area {

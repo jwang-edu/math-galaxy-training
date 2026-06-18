@@ -35,10 +35,25 @@ const drawRarityTable = [
   { rarity: "Legendary", weight: 5 },
 ];
 
+function getRarityCode(rarity) {
+  switch (rarity) {
+    case "Common":
+      return "C";
+    case "Rare":
+      return "R";
+    case "Epic":
+      return "SR";
+    case "Legendary":
+      return "SSR";
+    default:
+      return "C";
+  }
+}
+
 const solarScienceCards = [
   {
     id: "sun",
-    cardNo: "SR-001",
+    cardNo: "SC-001",
     realmId: "solar_realm",
     name: "Sun",
     nameZh: "太阳",
@@ -53,12 +68,12 @@ const solarScienceCards = [
   },
   {
     id: "mercury",
-    cardNo: "SR-002",
+    cardNo: "SC-002",
     realmId: "solar_realm",
     name: "Mercury",
     nameZh: "水星",
     category: "岩石行星",
-    rarity: "Common",
+    rarity: "Rare",
     image: "/cards/solar/mercury.png",
     fallbackIcon: "☿️",
     scienceIntro: "水星是最靠近太阳的行星，公转很快，昼夜温差极大。",
@@ -68,7 +83,7 @@ const solarScienceCards = [
   },
   {
     id: "venus",
-    cardNo: "SR-003",
+    cardNo: "SC-003",
     realmId: "solar_realm",
     name: "Venus",
     nameZh: "金星",
@@ -83,7 +98,7 @@ const solarScienceCards = [
   },
   {
     id: "earth",
-    cardNo: "SR-004",
+    cardNo: "SC-004",
     realmId: "solar_realm",
     name: "Earth",
     nameZh: "地球",
@@ -98,7 +113,7 @@ const solarScienceCards = [
   },
   {
     id: "moon",
-    cardNo: "SR-005",
+    cardNo: "SC-005",
     realmId: "solar_realm",
     name: "Moon",
     nameZh: "月球",
@@ -113,7 +128,7 @@ const solarScienceCards = [
   },
   {
     id: "mars",
-    cardNo: "SR-006",
+    cardNo: "SC-006",
     realmId: "solar_realm",
     name: "Mars",
     nameZh: "火星",
@@ -128,7 +143,7 @@ const solarScienceCards = [
   },
   {
     id: "jupiter",
-    cardNo: "SR-007",
+    cardNo: "SC-007",
     realmId: "solar_realm",
     name: "Jupiter",
     nameZh: "木星",
@@ -143,7 +158,7 @@ const solarScienceCards = [
   },
   {
     id: "saturn",
-    cardNo: "SR-008",
+    cardNo: "SC-008",
     realmId: "solar_realm",
     name: "Saturn",
     nameZh: "土星",
@@ -158,7 +173,7 @@ const solarScienceCards = [
   },
   {
     id: "uranus",
-    cardNo: "SR-009",
+    cardNo: "SC-009",
     realmId: "solar_realm",
     name: "Uranus",
     nameZh: "天王星",
@@ -173,7 +188,7 @@ const solarScienceCards = [
   },
   {
     id: "neptune",
-    cardNo: "SR-010",
+    cardNo: "SC-010",
     realmId: "solar_realm",
     name: "Neptune",
     nameZh: "海王星",
@@ -188,7 +203,7 @@ const solarScienceCards = [
   },
   {
     id: "pluto",
-    cardNo: "SR-011",
+    cardNo: "SC-011",
     realmId: "solar_realm",
     name: "Pluto",
     nameZh: "冥王星",
@@ -203,7 +218,7 @@ const solarScienceCards = [
   },
   {
     id: "asteroid_belt",
-    cardNo: "SR-012",
+    cardNo: "SC-012",
     realmId: "solar_realm",
     name: "Asteroid Belt",
     nameZh: "小行星带",
@@ -218,7 +233,7 @@ const solarScienceCards = [
   },
   {
     id: "comet",
-    cardNo: "SR-013",
+    cardNo: "SC-013",
     realmId: "solar_realm",
     name: "Comet",
     nameZh: "彗星",
@@ -233,7 +248,7 @@ const solarScienceCards = [
   },
   {
     id: "kuiper_belt",
-    cardNo: "SR-014",
+    cardNo: "SC-014",
     realmId: "solar_realm",
     name: "Kuiper Belt",
     nameZh: "柯伊伯带",
@@ -248,7 +263,7 @@ const solarScienceCards = [
   },
   {
     id: "oort_cloud",
-    cardNo: "SR-015",
+    cardNo: "SC-015",
     realmId: "solar_realm",
     name: "Oort Cloud",
     nameZh: "奥尔特云",
@@ -1336,7 +1351,7 @@ function renderSolarRealmMap(user) {
       <button class="solar-node realm-node ${unlocked ? "unlocked" : "locked"} ${card.rarity.toLowerCase()}${active}" type="button" data-card-id="${card.id}" style="--node-index: ${index}">
         <span class="realm-node-core">${unlocked ? renderCelestialThumb(card) : "?"}</span>
         <strong>${card.nameZh}</strong>
-        <small>${card.rarity}</small>
+        <small>${getRarityCode(card.rarity)} · ${card.cardNo}</small>
       </button>
     `;
   }).join("");
@@ -1370,8 +1385,8 @@ function renderScienceCardFace(card, entry, unlocked, options = {}) {
       <div class="card-constellation" aria-hidden="true"></div>
       <div class="card-orbit-ring" aria-hidden="true"></div>
       <div class="card-topline">
-        <span class="rarity-badge">${card.rarity}</span>
-        <span class="card-no">${card.cardNo}</span>
+        <span class="rarity-badge rarity-${card.rarity.toLowerCase()}">${getRarityCode(card.rarity)}</span>
+        <span class="card-number">${card.cardNo}</span>
       </div>
       <div class="card-image-area">
         ${imageMarkup}
@@ -1614,7 +1629,7 @@ function handleSolarMapPreview(event) {
   const card = getSolarCard(node.dataset.cardId);
   const owned = Boolean(user?.cardCollection?.[card.id]?.owned);
   els.mapPreview.innerHTML = owned
-    ? `<strong>${card.fallbackIcon ?? "✦"} ${card.nameZh}</strong><span>${card.category} · ${card.rarity} · Science Power ${card.sciencePower}</span>`
+    ? `<strong>${card.fallbackIcon ?? "✦"} ${card.nameZh}</strong><span>${getRarityCode(card.rarity)} · ${card.cardNo} · ${card.category} · Science Power ${card.sciencePower}</span>`
     : `<strong>未点亮星体</strong><span>开启科学星光包，发现 ${card.nameZh} 的科学档案。</span>`;
 }
 
@@ -1643,9 +1658,9 @@ function showScienceCardDetail(cardId) {
         ${renderScienceCardFace(card, entry, owned, { compact: false, asButton: false })}
       </div>
       <div class="detail-science-file">
-        <p class="eyebrow">Solar Science Cards · ${card.cardNo}</p>
+        <p class="eyebrow">Solar Science Cards · ${getRarityCode(card.rarity)} · ${card.cardNo}</p>
         <h2 id="cardDetailTitle">${owned ? `${card.nameZh} / ${card.name}` : "Locked Science Card"}</h2>
-        <strong>${card.category} · ${card.rarity}</strong>
+        <strong>${card.category} · ${getRarityCode(card.rarity)} · ${card.cardNo}</strong>
         <p>${owned ? card.scienceIntro : `尚未点亮 ${card.nameZh} 的星体档案。完成练习获得探索机会，开启科学星光包来发现它。`}</p>
         ${owned ? renderDomainBars(card) : ""}
         ${owned ? `<div class="detail-key-ideas">${card.keyIdeas.map((idea) => `<span class="key-idea-pill">${idea}</span>`).join("")}</div>` : ""}
