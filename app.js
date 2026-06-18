@@ -44,7 +44,8 @@ const solarScienceCards = [
     nameZh: "太阳",
     category: "恒星",
     rarity: "Legendary",
-    image: "☀️",
+    image: "/cards/solar/sun.png",
+    fallbackIcon: "☀️",
     scienceIntro: "太阳是太阳系的中心恒星，提供光和热，也用强大的引力维系行星轨道。",
     keyIdeas: ["核聚变释放能量", "太阳风会影响空间环境", "太阳质量占太阳系绝大部分"],
     domains: { gravity: 100, orbit: 70, matter: 82, energy: 100, mystery: 86 },
@@ -58,7 +59,8 @@ const solarScienceCards = [
     nameZh: "水星",
     category: "岩石行星",
     rarity: "Common",
-    image: "☿️",
+    image: "/cards/solar/mercury.png",
+    fallbackIcon: "☿️",
     scienceIntro: "水星是最靠近太阳的行星，公转很快，昼夜温差极大。",
     keyIdeas: ["轨道周期约 88 天", "几乎没有厚大气", "表面布满撞击坑"],
     domains: { gravity: 32, orbit: 92, matter: 70, energy: 72, mystery: 48 },
@@ -72,7 +74,8 @@ const solarScienceCards = [
     nameZh: "金星",
     category: "岩石行星",
     rarity: "Rare",
-    image: "♀️",
+    image: "/cards/solar/venus.png",
+    fallbackIcon: "♀️",
     scienceIntro: "金星拥有浓厚二氧化碳大气和强烈温室效应，是太阳系最热的行星。",
     keyIdeas: ["自转方向很特别", "云层含硫酸成分", "表面气压极高"],
     domains: { gravity: 62, orbit: 64, matter: 84, energy: 95, mystery: 68 },
@@ -86,7 +89,8 @@ const solarScienceCards = [
     nameZh: "地球",
     category: "生命行星",
     rarity: "Epic",
-    image: "🌍",
+    image: "/cards/solar/earth.png",
+    fallbackIcon: "🌍",
     scienceIntro: "地球拥有液态水、活跃大气和磁场，是目前已知唯一孕育生命的星球。",
     keyIdeas: ["液态水塑造气候和地貌", "磁场保护生命环境", "板块运动让地球持续变化"],
     domains: { gravity: 68, orbit: 76, matter: 90, energy: 82, mystery: 92 },
@@ -100,7 +104,8 @@ const solarScienceCards = [
     nameZh: "月球",
     category: "天然卫星",
     rarity: "Common",
-    image: "🌙",
+    image: "/cards/solar/moon.png",
+    fallbackIcon: "🌙",
     scienceIntro: "月球是地球的天然卫星，影响潮汐，也是人类首次登陆的外星世界。",
     keyIdeas: ["潮汐与月球引力有关", "月相来自日照角度变化", "表面保存早期撞击历史"],
     domains: { gravity: 38, orbit: 78, matter: 64, energy: 40, mystery: 58 },
@@ -114,7 +119,8 @@ const solarScienceCards = [
     nameZh: "火星",
     category: "岩石行星",
     rarity: "Rare",
-    image: "♂️",
+    image: "/cards/solar/mars.png",
+    fallbackIcon: "♂️",
     scienceIntro: "火星是红色岩石行星，拥有巨型火山、峡谷和可能存在过液态水的证据。",
     keyIdeas: ["氧化铁让火星呈红色", "极冠含冰", "探测车持续研究古环境"],
     domains: { gravity: 46, orbit: 70, matter: 82, energy: 56, mystery: 86 },
@@ -128,7 +134,8 @@ const solarScienceCards = [
     nameZh: "木星",
     category: "气态巨行星",
     rarity: "Epic",
-    image: "🟠",
+    image: "/cards/solar/jupiter.png",
+    fallbackIcon: "🟠",
     scienceIntro: "木星是太阳系最大的行星，强大引力和大红斑风暴使它成为行星科学重点。",
     keyIdeas: ["主要由氢和氦组成", "大红斑是巨大风暴", "拥有大量卫星"],
     domains: { gravity: 96, orbit: 64, matter: 86, energy: 88, mystery: 82 },
@@ -142,7 +149,8 @@ const solarScienceCards = [
     nameZh: "土星",
     category: "环状巨行星",
     rarity: "Epic",
-    image: "🪐",
+    image: "/cards/solar/saturn.png",
+    fallbackIcon: "🪐",
     scienceIntro: "土星以壮观光环闻名，光环由冰粒、岩屑和尘埃组成。",
     keyIdeas: ["光环不是实体圆盘", "密度很低", "土卫六拥有浓厚大气"],
     domains: { gravity: 88, orbit: 68, matter: 90, energy: 72, mystery: 86 },
@@ -156,7 +164,8 @@ const solarScienceCards = [
     nameZh: "天王星",
     category: "冰巨行星",
     rarity: "Rare",
-    image: "🔵",
+    image: "/cards/solar/uranus.png",
+    fallbackIcon: "🔵",
     scienceIntro: "天王星是一颗冰巨行星，自转轴几乎横躺，像在轨道上侧身滚动。",
     keyIdeas: ["富含水、氨和甲烷冰", "蓝绿色来自甲烷吸收红光", "极端倾角造成特殊季节"],
     domains: { gravity: 74, orbit: 80, matter: 82, energy: 52, mystery: 78 },
@@ -170,7 +179,8 @@ const solarScienceCards = [
     nameZh: "海王星",
     category: "冰巨行星",
     rarity: "Rare",
-    image: "🔷",
+    image: "/cards/solar/neptune.png",
+    fallbackIcon: "🔷",
     scienceIntro: "海王星是遥远的冰巨行星，拥有太阳系中极强的高速风暴。",
     keyIdeas: ["通过引力异常被预言发现", "风速可非常惊人", "轨道周期约 165 年"],
     domains: { gravity: 78, orbit: 82, matter: 80, energy: 78, mystery: 80 },
@@ -184,7 +194,8 @@ const solarScienceCards = [
     nameZh: "冥王星",
     category: "矮行星",
     rarity: "Rare",
-    image: "🟤",
+    image: "/cards/solar/pluto.png",
+    fallbackIcon: "🟤",
     scienceIntro: "冥王星是柯伊伯带中的矮行星，表面有冰原、山脉和复杂地貌。",
     keyIdeas: ["轨道偏心率较大", "与卡戎形成独特系统", "新视野号揭示了丰富地貌"],
     domains: { gravity: 28, orbit: 86, matter: 74, energy: 38, mystery: 88 },
@@ -198,7 +209,8 @@ const solarScienceCards = [
     nameZh: "小行星带",
     category: "天体区域",
     rarity: "Common",
-    image: "☄️",
+    image: "/cards/solar/asteroid-belt.png",
+    fallbackIcon: "☄️",
     scienceIntro: "小行星带位于火星和木星之间，保存着太阳系早期形成过程的线索。",
     keyIdeas: ["包含大量岩石小天体", "谷神星是其中的矮行星", "木星引力影响其结构"],
     domains: { gravity: 44, orbit: 76, matter: 88, energy: 34, mystery: 72 },
@@ -212,7 +224,8 @@ const solarScienceCards = [
     nameZh: "彗星",
     category: "冰尘天体",
     rarity: "Common",
-    image: "💫",
+    image: "/cards/solar/comet.png",
+    fallbackIcon: "💫",
     scienceIntro: "彗星由冰、尘埃和岩石组成，接近太阳时会形成明亮彗发和彗尾。",
     keyIdeas: ["彗尾总大致背向太阳", "保存太阳系原始物质", "轨道可能非常 elongated"],
     domains: { gravity: 22, orbit: 92, matter: 76, energy: 64, mystery: 82 },
@@ -226,7 +239,8 @@ const solarScienceCards = [
     nameZh: "柯伊伯带",
     category: "外太阳系区域",
     rarity: "Epic",
-    image: "❄️",
+    image: "/cards/solar/kuiper-belt.png",
+    fallbackIcon: "❄️",
     scienceIntro: "柯伊伯带位于海王星外侧，包含大量冰质小天体和矮行星。",
     keyIdeas: ["冥王星属于柯伊伯带天体", "保存太阳系外缘信息", "短周期彗星可能来自这里"],
     domains: { gravity: 58, orbit: 88, matter: 84, energy: 36, mystery: 94 },
@@ -240,7 +254,8 @@ const solarScienceCards = [
     nameZh: "奥尔特云",
     category: "假想彗星云",
     rarity: "Legendary",
-    image: "🌌",
+    image: "/cards/solar/oort-cloud.png",
+    fallbackIcon: "🌌",
     scienceIntro: "奥尔特云被认为是包围太阳系的遥远冰质天体云，可能是许多长周期彗星的来源。",
     keyIdeas: ["距离太阳极其遥远", "尚未被直接观测确认", "连接太阳系与星际空间边界"],
     domains: { gravity: 66, orbit: 96, matter: 78, energy: 30, mystery: 100 },
@@ -1319,7 +1334,7 @@ function renderSolarRealmMap(user) {
     const active = state.recentLightNodeId === card.lightNodeId ? " is-new-light" : "";
     return `
       <button class="solar-node realm-node ${unlocked ? "unlocked" : "locked"} ${card.rarity.toLowerCase()}${active}" type="button" data-card-id="${card.id}" style="--node-index: ${index}">
-        <span class="realm-node-core">${unlocked ? card.image : "?"}</span>
+        <span class="realm-node-core">${unlocked ? renderCelestialThumb(card) : "?"}</span>
         <strong>${card.nameZh}</strong>
         <small>${card.rarity}</small>
       </button>
@@ -1347,7 +1362,7 @@ function renderScienceCardFace(card, entry, unlocked, options = {}) {
   const subtitle = unlocked ? `${card.category} · Solar Realm` : "Solar Realm Collection";
   const intro = unlocked ? card.scienceIntro : `尚未点亮 ${card.nameZh} 的星体档案。开启科学星光包，解锁这份宇宙科学档案。`;
   const ideas = unlocked ? card.keyIdeas.slice(0, options.compact ? 3 : 4) : ["未发现", "科学档案", "等待点亮"];
-  const image = unlocked ? card.image : "◎";
+  const imageMarkup = unlocked ? renderCelestialImage(card) : `<span class="planet-fallback">◎</span>`;
   const countText = unlocked ? `Lv.${entry.level} · ×${entry.count}${entry.isShiny ? " · Shiny" : ""}` : "LOCKED";
 
   return `
@@ -1359,7 +1374,7 @@ function renderScienceCardFace(card, entry, unlocked, options = {}) {
         <span class="card-no">${card.cardNo}</span>
       </div>
       <div class="card-image-area">
-        <span class="planet-image ${card.rarity.toLowerCase()}">${image}</span>
+        ${imageMarkup}
       </div>
       <div class="card-title-block">
         <strong class="card-title">${title}</strong>
@@ -1386,6 +1401,35 @@ function renderCardBackMini() {
       <strong>Science Cards</strong>
       <em>My Stellar Journey</em>
     </div>
+  `;
+}
+
+
+function renderCelestialImage(card) {
+  const fallback = card.fallbackIcon ?? "◎";
+  return `
+    <img
+      class="planet-image ${card.rarity.toLowerCase()}"
+      src="${card.image}"
+      alt="${card.nameZh} ${card.name}"
+      loading="lazy"
+      onerror="this.hidden=true;this.nextElementSibling.hidden=false"
+    >
+    <span class="planet-fallback ${card.rarity.toLowerCase()}" hidden>${fallback}</span>
+  `;
+}
+
+function renderCelestialThumb(card) {
+  const fallback = card.fallbackIcon ?? "✦";
+  return `
+    <img
+      class="realm-node-image"
+      src="${card.image}"
+      alt=""
+      loading="lazy"
+      onerror="this.hidden=true;this.nextElementSibling.hidden=false"
+    >
+    <span class="realm-node-fallback" hidden>${fallback}</span>
   `;
 }
 
@@ -1570,7 +1614,7 @@ function handleSolarMapPreview(event) {
   const card = getSolarCard(node.dataset.cardId);
   const owned = Boolean(user?.cardCollection?.[card.id]?.owned);
   els.mapPreview.innerHTML = owned
-    ? `<strong>${card.image} ${card.nameZh}</strong><span>${card.category} · ${card.rarity} · Science Power ${card.sciencePower}</span>`
+    ? `<strong>${card.fallbackIcon ?? "✦"} ${card.nameZh}</strong><span>${card.category} · ${card.rarity} · Science Power ${card.sciencePower}</span>`
     : `<strong>未点亮星体</strong><span>开启科学星光包，发现 ${card.nameZh} 的科学档案。</span>`;
 }
 
