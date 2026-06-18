@@ -8,7 +8,7 @@
   </head>
   <body>
     <div class="space-grid" aria-hidden="true"></div>
-    <section id="userScreen" class="user-screen hidden" aria-labelledby="user-screen-title">
+    <section id="userScreen" class="user-screen" aria-labelledby="user-screen-title">
       <div class="user-gate">
         <p class="eyebrow">Math Galaxy Crew Select</p>
         <h1 id="user-screen-title">欢迎回到数学星际训练舱</h1>
@@ -61,6 +61,88 @@
       </form>
     </div>
 
+
+
+    <section id="journeyScreen" class="journey-screen hidden" aria-labelledby="journeyTitle">
+      <div class="journey-shell">
+        <header class="journey-header">
+          <div>
+            <p class="eyebrow">My Stellar Journey</p>
+            <h1 id="journeyTitle">我的星际之旅</h1>
+            <p>用每日练习点亮太阳星域科学图鉴。</p>
+          </div>
+          <button id="closeJourneyButton" class="ghost-button" type="button">返回训练舱</button>
+        </header>
+
+        <div class="journey-dashboard">
+          <div class="pilot-journey-card">
+            <span id="journeyPilotAvatar" class="journey-avatar">🚀</span>
+            <div>
+              <strong id="journeyPilotName">数学飞行员</strong>
+              <span id="journeyProgressText">太阳星域 0 / 15</span>
+            </div>
+          </div>
+          <div><span>累计星星</span><strong id="journeyTotalStars">0</strong></div>
+          <div><span>星尘</span><strong id="journeyStarDust">0</strong></div>
+          <div><span>探索机会</span><strong id="journeyDrawChances">0</strong></div>
+          <div><span>下次探索进度</span><strong id="journeyDrawProgress">0 / 100</strong></div>
+        </div>
+
+        <section class="stellar-pack-panel">
+          <div>
+            <p class="eyebrow">科学星光包</p>
+            <h2>开启科学星光包</h2>
+            <p id="packHintText">完成练习获得更多探索机会</p>
+          </div>
+          <button id="openPackButton" class="primary-button launch-button" type="button">开启科学星光包</button>
+        </section>
+
+        <section class="solar-map-section" aria-labelledby="solarRealmTitle">
+          <div class="section-title-row">
+            <div>
+              <p class="eyebrow">Solar Realm</p>
+              <h2 id="solarRealmTitle">Solar Realm 太阳星域</h2>
+            </div>
+            <strong id="solarProgressBadge">0 / 15</strong>
+          </div>
+          <div id="solarRealmMap" class="solar-realm-map"></div>
+          <div id="mapPreview" class="map-preview">点击星体节点查看科学卡预览</div>
+        </section>
+
+        <section class="science-card-section" aria-labelledby="scienceCardsTitle">
+          <div class="section-title-row">
+            <div>
+              <p class="eyebrow">Science Collection</p>
+              <h2 id="scienceCardsTitle">我的宇宙科学卡</h2>
+            </div>
+            <div id="rarityFilters" class="rarity-filters" aria-label="稀有度筛选">
+              <button class="mini-action is-active" type="button" data-rarity="All">全部</button>
+              <button class="mini-action" type="button" data-rarity="Common">Common</button>
+              <button class="mini-action" type="button" data-rarity="Rare">Rare</button>
+              <button class="mini-action" type="button" data-rarity="Epic">Epic</button>
+              <button class="mini-action" type="button" data-rarity="Legendary">Legendary</button>
+            </div>
+          </div>
+          <div id="scienceCardGrid" class="science-card-grid"></div>
+        </section>
+      </div>
+    </section>
+
+    <div id="packResultModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="packResultTitle">
+      <div class="science-modal-card result-card-modal">
+        <button id="closePackResult" class="icon-button modal-close" type="button" aria-label="关闭">×</button>
+        <div id="packResultContent"></div>
+      </div>
+    </div>
+
+    <div id="scienceCardModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="cardDetailTitle">
+      <div class="science-modal-card">
+        <button id="closeCardDetail" class="icon-button modal-close" type="button" aria-label="关闭">×</button>
+        <div id="scienceCardDetail"></div>
+      </div>
+    </div>
+
+
     <button id="recordsToggle" class="records-toggle" type="button">每日星图</button>
     <main id="appShell" class="app-shell hidden">
       <section class="practice-panel" aria-labelledby="app-title">
@@ -71,6 +153,7 @@
             <div class="pilot-strip">
               当前飞行员：<strong id="currentPilotText">🚀 默认飞行员｜未设置｜星星学徒</strong>
               <span>🔥 <b id="streakDaysText">0</b> 天</span>
+              <button id="journeyButton" class="ghost-button" type="button">我的星际之旅</button>
               <button id="switchUserButton" class="ghost-button" type="button">切换用户</button>
               <button id="editCurrentUserButton" class="ghost-button" type="button">编辑资料</button>
             </div>
@@ -127,13 +210,7 @@
 
         <section id="welcomeScreen" class="welcome-screen">
           <div class="hero-art" aria-hidden="true">
-            <div class="planet">
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-            <div class="orbit-star orbit-star-one"></div>
-            <div class="orbit-star orbit-star-two"></div>
+            <img class="hero-planet-image" src="/images/math-galaxy-planet.svg" alt="">
           </div>
           <h2>选择任务星球，启动训练</h2>
           <p>不同题型有基础星，答得越快奖励越多；答错扣 1 颗星。完成后会自动保存今天的成绩。</p>
@@ -181,13 +258,15 @@
           </div>
           <div class="question-meta">
             <span id="timerText">20 秒</span>
+            <span id="totalTimeText">总用时 00:00</span>
+            <span id="sessionStarsText">本轮星星 0</span>
           </div>
           <div class="timer-track" aria-hidden="true">
             <div id="timerFill"></div>
           </div>
           <div class="question-stage">
             <div id="rewardBurst" class="reward-burst" aria-hidden="true"></div>
-            <div id="questionText" class="question-text">12 + 34 = ?</div>
+            <div id="questionText" class="question-text">12 + 34 =</div>
           </div>
           <form id="answerForm" class="answer-form">
             <label for="answerInput">答案</label>
@@ -247,6 +326,6 @@
       </aside>
     </main>
 
-    <script type="module" src="/app.js"></script>
+    <script type="module" src="./app.js"></script>
   </body>
 </html>

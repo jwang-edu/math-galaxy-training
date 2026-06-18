@@ -565,82 +565,19 @@ h2 {
 
 .hero-art {
   position: relative;
-  width: min(380px, 76vw);
-  height: 210px;
-  margin-bottom: 12px;
-}
-
-.hero-art::before {
-  content: "";
-  position: absolute;
-  left: 28px;
-  right: 28px;
-  top: 78px;
-  height: 58px;
-  border: 1px solid rgba(119, 210, 255, 0.42);
-  border-radius: 50%;
-  transform: rotate(-12deg);
-  box-shadow: 0 0 22px rgba(55, 197, 255, 0.16);
-}
-
-.hero-art::after {
-  content: "";
-  position: absolute;
-  left: 82px;
-  right: 82px;
-  top: 106px;
-  height: 18px;
-  border: 1px solid rgba(255, 211, 90, 0.34);
-  border-left-color: transparent;
-  border-right-color: transparent;
-  border-radius: 50%;
-  transform: rotate(-12deg);
-  z-index: 4;
-}
-
-.planet {
-  position: absolute;
-  left: 112px;
-  top: 34px;
-  width: 156px;
-  height: 156px;
-  border-radius: 50%;
-  background:
-    radial-gradient(circle at 31% 24%, rgba(255, 255, 255, 0.92) 0 8%, rgba(139, 235, 255, 0.54) 9% 18%, transparent 19%),
-    linear-gradient(128deg, transparent 0 38%, rgba(255, 255, 255, 0.30) 39% 50%, transparent 51% 100%),
-    radial-gradient(circle at 34% 30%, #8ff4ff 0 14%, #3c8eff 34%, #204dff 58%, #1a1f91 100%);
-  box-shadow:
-    inset -28px -26px 26px rgba(2, 6, 23, 0.46),
-    inset 18px 16px 24px rgba(255, 255, 255, 0.12),
-    0 0 50px rgba(55, 197, 255, 0.38);
-  z-index: 3;
+  width: min(720px, 92vw);
+  aspect-ratio: 16 / 9;
+  margin: 0 auto 18px;
+  border-radius: 22px;
   overflow: hidden;
+  filter: drop-shadow(0 0 32px rgba(55, 197, 255, 0.26));
 }
 
-.planet span {
-  position: absolute;
-  height: 10px;
-  border-radius: 999px;
-  background: rgba(209, 246, 255, 0.62);
-  box-shadow: 0 0 10px rgba(119, 210, 255, 0.22);
-}
-
-.planet span:nth-child(1) {
-  width: 58px;
-  left: 32px;
-  top: 52px;
-}
-
-.planet span:nth-child(2) {
-  width: 44px;
-  right: 28px;
-  top: 90px;
-}
-
-.planet span:nth-child(3) {
-  width: 34px;
-  left: 66px;
-  bottom: 42px;
+.hero-planet-image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
 }
 
 .orbit-star {
@@ -890,6 +827,9 @@ h2 {
 
 .question-meta {
   margin-bottom: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 .question-meta span,
@@ -1504,5 +1444,923 @@ h2 {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+  }
+}
+
+.journey-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 24;
+  padding: 24px;
+  overflow: auto;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(55, 197, 255, 0.22), transparent 32%),
+    radial-gradient(circle at 80% 18%, rgba(155, 109, 255, 0.22), transparent 32%),
+    rgba(2, 6, 23, 0.94);
+  backdrop-filter: blur(18px);
+}
+
+.journey-shell {
+  width: min(1180px, 100%);
+  margin: 0 auto;
+  display: grid;
+  gap: 18px;
+}
+
+.journey-header,
+.section-title-row,
+.stellar-pack-panel,
+.journey-dashboard,
+.pilot-journey-card {
+  display: flex;
+  align-items: center;
+}
+
+.journey-header,
+.section-title-row,
+.stellar-pack-panel {
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.journey-header,
+.journey-dashboard > div,
+.stellar-pack-panel,
+.solar-map-section,
+.science-card-section,
+.science-modal-card {
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.035)),
+    rgba(8, 22, 55, 0.72);
+  box-shadow: var(--shadow), inset 0 0 28px rgba(55, 197, 255, 0.06);
+  backdrop-filter: blur(18px);
+}
+
+.journey-header,
+.stellar-pack-panel,
+.solar-map-section,
+.science-card-section {
+  padding: 20px;
+}
+
+.journey-header h1,
+.stellar-pack-panel h2,
+.section-title-row h2 {
+  margin: 0;
+}
+
+.journey-dashboard {
+  display: grid;
+  grid-template-columns: 1.55fr repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.journey-dashboard > div {
+  min-height: 92px;
+  padding: 16px;
+  display: grid;
+  align-content: center;
+  gap: 7px;
+}
+
+.journey-dashboard span {
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.journey-dashboard strong {
+  color: #fff;
+  font-size: 1.5rem;
+}
+
+.pilot-journey-card {
+  grid-template-columns: auto 1fr;
+}
+
+.journey-avatar {
+  width: 58px;
+  height: 58px;
+  border-radius: 18px;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 211, 90, 0.12);
+  border: 1px solid rgba(255, 211, 90, 0.46);
+  font-size: 2rem;
+}
+
+.stellar-pack-panel {
+  background:
+    radial-gradient(circle at 90% 20%, rgba(255, 211, 90, 0.20), transparent 34%),
+    linear-gradient(135deg, rgba(17, 109, 255, 0.24), rgba(155, 109, 255, 0.16));
+}
+
+#openPackButton:disabled {
+  opacity: 0.52;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.solar-realm-map {
+  min-height: 300px;
+  margin-top: 16px;
+  padding: 28px 18px;
+  border-radius: 18px;
+  display: grid;
+  grid-template-columns: repeat(15, minmax(78px, 1fr));
+  gap: 10px;
+  background:
+    linear-gradient(90deg, transparent 0 4%, rgba(55, 197, 255, 0.20) 5%, transparent 6% 100%),
+    radial-gradient(circle at 10% 50%, rgba(255, 211, 90, 0.18), transparent 18%),
+    rgba(2, 6, 23, 0.36);
+  overflow-x: auto;
+}
+
+.solar-node {
+  min-width: 78px;
+  min-height: 150px;
+  border: 1px solid rgba(100, 191, 255, 0.18);
+  border-radius: 999px 999px 16px 16px;
+  padding: 10px 7px;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 6px;
+  color: var(--muted);
+  background: rgba(7, 17, 42, 0.62);
+  transform: translateY(calc((var(--node-index) % 2) * 26px));
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.solar-node:hover {
+  transform: translateY(calc((var(--node-index) % 2) * 26px - 6px));
+}
+
+.solar-node span {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.07);
+  font-size: 1.5rem;
+}
+
+.solar-node strong,
+.solar-node small {
+  font-size: 0.78rem;
+}
+
+.solar-node.is-lit {
+  color: #fff;
+  border-color: rgba(255, 211, 90, 0.62);
+  box-shadow: 0 0 24px rgba(55, 197, 255, 0.18), inset 0 0 24px rgba(255, 211, 90, 0.08);
+}
+
+.solar-node.is-lit span {
+  background: radial-gradient(circle, rgba(255, 211, 90, 0.34), rgba(55, 197, 255, 0.12));
+  filter: drop-shadow(0 0 12px rgba(255, 211, 90, 0.44));
+}
+
+.solar-node.is-new-light {
+  animation: node-light 1.1s ease-in-out 2;
+}
+
+.map-preview {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  color: var(--muted);
+  background: rgba(2, 6, 23, 0.36);
+}
+
+.map-preview strong,
+.map-preview span {
+  display: block;
+}
+
+.map-preview strong {
+  color: var(--ink);
+}
+
+.rarity-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.mini-action.is-active {
+  border-color: rgba(255, 211, 90, 0.72);
+  color: var(--gold) !important;
+}
+
+.science-card-grid {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 12px;
+}
+
+.science-card {
+  min-height: 210px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  display: grid;
+  align-content: center;
+  gap: 7px;
+  color: var(--ink);
+  text-align: left;
+  background: rgba(6, 16, 42, 0.72);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.science-card:hover {
+  transform: translateY(-4px);
+}
+
+.science-card-image {
+  width: 58px;
+  height: 58px;
+  border-radius: 18px;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.07);
+  font-size: 2rem;
+}
+
+.science-card small,
+.science-card em,
+.science-card span:not(.science-card-image) {
+  color: var(--muted);
+  font-style: normal;
+  font-weight: 800;
+}
+
+.science-card.is-unknown {
+  opacity: 0.58;
+  filter: grayscale(0.9);
+}
+
+.rarity-common { border-color: rgba(155, 182, 214, 0.42); }
+.rarity-rare { border-color: rgba(55, 197, 255, 0.58); }
+.rarity-epic { border-color: rgba(155, 109, 255, 0.68); }
+.rarity-legendary { border-color: rgba(255, 211, 90, 0.72); }
+
+.science-modal-card {
+  position: relative;
+  width: min(720px, 100%);
+  max-height: min(86vh, 780px);
+  overflow: auto;
+  padding: 24px;
+}
+
+.modal-close {
+  position: absolute;
+  right: 14px;
+  top: 14px;
+}
+
+.drawn-card,
+.card-detail {
+  display: grid;
+  gap: 14px;
+}
+
+.drawn-card > span,
+.detail-image {
+  width: 96px;
+  height: 96px;
+  border-radius: 28px;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(circle, rgba(255, 211, 90, 0.24), rgba(55, 197, 255, 0.11));
+  font-size: 3.4rem;
+  box-shadow: 0 0 24px rgba(55, 197, 255, 0.24);
+}
+
+.drawn-card strong,
+.card-detail h2 {
+  font-size: 1.8rem;
+}
+
+.domain-bars {
+  display: grid;
+  gap: 10px;
+}
+
+.domain-bars div {
+  position: relative;
+  min-height: 38px;
+  padding: 9px 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  background: rgba(2, 6, 23, 0.45);
+}
+
+.domain-bars i {
+  position: absolute;
+  inset: 0 auto 0 0;
+  z-index: -1;
+  background: linear-gradient(90deg, rgba(55, 197, 255, 0.34), rgba(255, 211, 90, 0.16));
+}
+
+.detail-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.detail-meta span {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 7px 10px;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+@keyframes node-light {
+  0%, 100% { box-shadow: 0 0 18px rgba(55, 197, 255, 0.18); }
+  50% { box-shadow: 0 0 42px rgba(255, 211, 90, 0.58), 0 0 64px rgba(55, 197, 255, 0.28); }
+}
+
+@media (max-width: 860px) {
+  .journey-dashboard {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .pilot-journey-card {
+    grid-column: 1 / -1;
+  }
+
+  .journey-header,
+  .section-title-row,
+  .stellar-pack-panel {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+/* Solar Science Cards VI */
+:root {
+  --space-bg: #070B1F;
+  --space-bg-2: #0B1230;
+  --card-bg: rgba(12, 20, 48, 0.88);
+  --text-main: #F8FAFC;
+  --text-secondary: #B9C6E8;
+  --text-muted: #7F8DB3;
+  --science-blue: #4F8CFF;
+  --orbit-cyan: #42E8FF;
+  --nebula-purple: #8B5CF6;
+  --solar-gold: #FFD166;
+  --plasma-pink: #FF5DA2;
+  --energy-green: #46F0A8;
+  --rarity-common: #7AA7C7;
+  --rarity-rare: #4F8CFF;
+  --rarity-epic: #9B5CFF;
+  --rarity-legendary: #FFD166;
+}
+
+.science-card-grid {
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  align-items: start;
+}
+
+.solar-science-card {
+  position: relative;
+  width: min(260px, 100%);
+  min-height: 380px;
+  margin: 0 auto;
+  padding: 14px;
+  border-radius: 24px;
+  overflow: hidden;
+  color: var(--text-main);
+  background:
+    radial-gradient(circle at 50% 20%, rgba(79, 140, 255, 0.28), transparent 32%),
+    radial-gradient(circle at 80% 8%, rgba(139, 92, 246, 0.22), transparent 28%),
+    linear-gradient(180deg, rgba(16, 27, 65, 0.96), rgba(7, 11, 31, 0.98));
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow:
+    0 18px 60px rgba(0, 0, 0, 0.42),
+    inset 0 0 32px rgba(255, 255, 255, 0.04);
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+button.solar-science-card {
+  cursor: pointer;
+}
+
+.solar-science-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(rgba(255,255,255,0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.045) 1px, transparent 1px);
+  background-size: 22px 22px;
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,0.55), transparent 70%);
+  pointer-events: none;
+}
+
+.solar-science-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.card-constellation {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 18% 22%, rgba(255,255,255,0.7) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 80% 28%, rgba(66,232,255,0.75) 0 1px, transparent 1.6px),
+    radial-gradient(circle at 72% 76%, rgba(255,209,102,0.75) 0 1px, transparent 1.7px);
+  opacity: 0.75;
+}
+
+.card-orbit-ring {
+  position: absolute;
+  top: 54px;
+  left: 50%;
+  width: 210px;
+  height: 90px;
+  border: 1px solid rgba(66, 232, 255, 0.28);
+  border-radius: 50%;
+  transform: translateX(-50%) rotate(-12deg);
+  box-shadow: 0 0 24px rgba(66, 232, 255, 0.12);
+  pointer-events: none;
+}
+
+.card-topline,
+.science-power {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.rarity-badge,
+.card-no {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  padding: 5px 9px;
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.06);
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.card-image-area {
+  position: relative;
+  height: 132px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.planet-image {
+  width: 118px;
+  height: 118px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 4rem;
+  background:
+    radial-gradient(circle at 30% 24%, rgba(255,255,255,0.86), rgba(66,232,255,0.26) 22%, rgba(79,140,255,0.12) 54%, rgba(7,11,31,0.2) 100%);
+  filter: drop-shadow(0 0 28px rgba(66, 232, 255, 0.35));
+}
+
+.planet-image.legendary {
+  width: 132px;
+  height: 132px;
+  filter: drop-shadow(0 0 34px rgba(255, 209, 102, 0.45));
+}
+
+.card-title {
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 900;
+  letter-spacing: 0;
+}
+
+.card-category {
+  display: block;
+  margin-top: 4px;
+  color: var(--orbit-cyan);
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.science-intro {
+  min-height: 48px;
+  margin: 10px 0 0;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  line-height: 1.45;
+}
+
+.key-ideas,
+.detail-key-ideas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.key-idea-pill {
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgba(66, 232, 255, 0.1);
+  border: 1px solid rgba(66, 232, 255, 0.22);
+  color: #CFF8FF;
+  font-size: 0.66rem;
+  font-weight: 800;
+}
+
+.domain-rows {
+  margin-top: 10px;
+  display: grid;
+  gap: 6px;
+}
+
+.domain-row {
+  display: grid;
+  grid-template-columns: 74px 34px 1fr;
+  align-items: center;
+  gap: 7px;
+  color: var(--text-secondary);
+  font-size: 0.69rem;
+}
+
+.domain-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.domain-value {
+  color: var(--text-main);
+  font-weight: 900;
+  text-align: right;
+}
+
+.domain-bar {
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+
+.domain-fill {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--orbit-cyan), var(--science-blue));
+  box-shadow: 0 0 12px rgba(66, 232, 255, 0.38);
+}
+
+.science-power {
+  margin-top: auto;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: linear-gradient(90deg, rgba(255, 209, 102, 0.16), rgba(66, 232, 255, 0.08));
+  border: 1px solid rgba(255, 209, 102, 0.22);
+}
+
+.science-power-label {
+  color: var(--text-secondary);
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.science-power-value {
+  color: var(--solar-gold);
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: 1.22rem;
+  font-weight: 900;
+  text-shadow: 0 0 16px rgba(255, 209, 102, 0.45);
+}
+
+.collection-meta {
+  margin-top: 8px;
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  font-weight: 900;
+}
+
+.card-common {
+  border-color: rgba(122, 167, 199, 0.5);
+  box-shadow: 0 0 24px rgba(122, 167, 199, 0.15), 0 18px 60px rgba(0, 0, 0, 0.42);
+}
+
+.card-rare {
+  border-color: rgba(79, 140, 255, 0.75);
+  box-shadow: 0 0 28px rgba(79, 140, 255, 0.28), inset 0 0 24px rgba(79, 140, 255, 0.08), 0 18px 60px rgba(0, 0, 0, 0.42);
+}
+
+.card-epic {
+  border-color: rgba(155, 92, 255, 0.8);
+  box-shadow: 0 0 34px rgba(155, 92, 255, 0.36), inset 0 0 28px rgba(155, 92, 255, 0.1), 0 18px 60px rgba(0, 0, 0, 0.42);
+}
+
+.card-legendary {
+  border-color: rgba(255, 209, 102, 0.95);
+  box-shadow: 0 0 42px rgba(255, 209, 102, 0.42), 0 0 80px rgba(255, 136, 0, 0.16), inset 0 0 34px rgba(255, 209, 102, 0.12), 0 18px 60px rgba(0, 0, 0, 0.42);
+}
+
+.card-legendary::after {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: conic-gradient(from 180deg, transparent, rgba(255, 209, 102, 0.16), transparent, rgba(255, 255, 255, 0.12), transparent);
+  animation: rotateGlow 8s linear infinite;
+  pointer-events: none;
+}
+
+.card-back-mini {
+  min-height: 88px;
+  margin-top: 12px;
+  border: 1px solid rgba(66,232,255,0.32);
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  background:
+    radial-gradient(circle at center, rgba(66,232,255,0.22), transparent 36%),
+    radial-gradient(circle at 80% 20%, rgba(255,209,102,0.14), transparent 24%),
+    linear-gradient(160deg, #071029, #0B1230 55%, #050816);
+  color: var(--text-secondary);
+}
+
+.card-back-mini strong {
+  color: var(--text-main);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.realm-node.locked {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px dashed rgba(255, 255, 255, 0.22);
+  filter: grayscale(1);
+  opacity: 0.45;
+}
+
+.realm-node.unlocked .realm-node-core {
+  background: radial-gradient(circle, #FFFFFF, #42E8FF 38%, #4F8CFF 70%);
+  box-shadow: 0 0 18px rgba(66, 232, 255, 0.8), 0 0 42px rgba(79, 140, 255, 0.32);
+}
+
+.realm-node.legendary.unlocked .realm-node-core {
+  background: radial-gradient(circle, #FFF8D6, #FFD166 45%, #FF8A00 80%);
+  box-shadow: 0 0 24px rgba(255, 209, 102, 0.9), 0 0 64px rgba(255, 138, 0, 0.36);
+}
+
+.stellar-pack-panel::after {
+  content: "🛰️ Solar Science Discovery Pack";
+  border: 1px solid rgba(255, 209, 102, 0.26);
+  border-radius: 18px;
+  padding: 14px 16px;
+  color: var(--solar-gold);
+  background:
+    radial-gradient(circle at 50% 50%, rgba(66,232,255,0.18), transparent 42%),
+    linear-gradient(135deg, rgba(7, 16, 41, 0.9), rgba(11, 18, 48, 0.72));
+  box-shadow: 0 0 30px rgba(255, 209, 102, 0.14);
+  font-weight: 900;
+}
+
+.pack-result-heading {
+  margin-bottom: 18px;
+}
+
+.drawn-card-wrap,
+.detail-card-preview {
+  display: grid;
+  justify-items: center;
+}
+
+.card-detail-layout {
+  display: grid;
+  grid-template-columns: minmax(240px, 300px) 1fr;
+  gap: 22px;
+  align-items: start;
+}
+
+.detail-science-file {
+  display: grid;
+  gap: 12px;
+}
+
+.detail-science-file p {
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+.detail-science-file .domain-row {
+  grid-template-columns: 132px 42px 1fr;
+  font-size: 0.82rem;
+}
+
+@keyframes rotateGlow {
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 720px) {
+  .science-card-grid {
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  }
+
+  .solar-science-card {
+    width: min(210px, 100%);
+    min-height: 320px;
+    border-radius: 22px;
+  }
+
+  .card-image-area {
+    height: 104px;
+  }
+
+  .planet-image {
+    width: 94px;
+    height: 94px;
+    font-size: 3rem;
+  }
+
+  .card-detail-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pack-choice-scene {
+  display: grid;
+  gap: 16px;
+  text-align: center;
+}
+
+.pack-choice-scene h2,
+.pack-choice-scene p {
+  margin: 0;
+}
+
+.pack-choice-scene p {
+  color: var(--text-secondary);
+}
+
+.pack-choice-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(160px, 1fr));
+  gap: 18px;
+  align-items: center;
+  perspective: 1200px;
+}
+
+.pack-choice-card {
+  position: relative;
+  min-height: 286px;
+  border: 0;
+  border-radius: 24px;
+  padding: 0;
+  color: var(--text-main);
+  background: transparent;
+  transform-style: preserve-3d;
+  animation: choice-float 2.4s ease-in-out infinite;
+  animation-delay: calc(var(--choice-index) * 130ms);
+  transition: transform 0.26s ease, filter 0.26s ease, opacity 0.26s ease;
+}
+
+.pack-choice-card:hover:not(:disabled) {
+  transform: translateY(-10px) rotateX(5deg) rotateZ(calc((var(--choice-index) - 1) * 2deg));
+  filter: drop-shadow(0 0 28px rgba(66, 232, 255, 0.34));
+}
+
+.pack-choice-card.is-faded {
+  opacity: 0.38;
+  filter: grayscale(0.85);
+}
+
+.pack-choice-card.is-selected {
+  z-index: 2;
+  filter: drop-shadow(0 0 38px rgba(255, 209, 102, 0.46));
+}
+
+.pack-choice-card.is-opening {
+  animation: card-open-flash 820ms ease-in-out forwards;
+}
+
+.choice-card-back {
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(66,232,255,0.42);
+  border-radius: 24px;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 10px;
+  background:
+    radial-gradient(circle at center, rgba(66,232,255,0.22), transparent 36%),
+    radial-gradient(circle at 80% 20%, rgba(255,209,102,0.14), transparent 24%),
+    linear-gradient(160deg, #071029, #0B1230 55%, #050816);
+  box-shadow:
+    0 18px 54px rgba(0, 0, 0, 0.42),
+    inset 0 0 30px rgba(66, 232, 255, 0.08);
+}
+
+.choice-card-back::before {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 18px;
+  background:
+    linear-gradient(rgba(255,255,255,0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.045) 1px, transparent 1px);
+  background-size: 22px 22px;
+  mask-image: radial-gradient(circle, black, transparent 74%);
+}
+
+.choice-card-back::after {
+  content: "";
+  position: absolute;
+  width: 160px;
+  height: 72px;
+  border: 1px solid rgba(66, 232, 255, 0.34);
+  border-radius: 50%;
+  transform: rotate(-14deg);
+  box-shadow: 0 0 24px rgba(66, 232, 255, 0.16);
+}
+
+.choice-card-back i {
+  width: 74px;
+  height: 74px;
+  border-radius: 50%;
+  display: block;
+  background:
+    radial-gradient(circle, #fff 0 8%, var(--orbit-cyan) 9% 38%, var(--science-blue) 39% 70%, transparent 72%),
+    radial-gradient(circle, rgba(255, 209, 102, 0.34), transparent 64%);
+  box-shadow: 0 0 30px rgba(66, 232, 255, 0.48);
+}
+
+.choice-card-back strong {
+  position: relative;
+  z-index: 1;
+  color: var(--text-main);
+  font-size: 1.05rem;
+  line-height: 1.05;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.choice-card-back em,
+.choice-card-back small {
+  position: relative;
+  z-index: 1;
+  color: var(--text-secondary);
+  font-style: normal;
+  font-weight: 800;
+}
+
+.choice-card-back small {
+  color: var(--solar-gold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.pack-choice-hint {
+  color: var(--text-muted);
+  font-weight: 800;
+}
+
+@keyframes choice-float {
+  0%, 100% { transform: translateY(0) rotateZ(calc((var(--choice-index) - 1) * -2deg)); }
+  50% { transform: translateY(-8px) rotateZ(calc((var(--choice-index) - 1) * 2deg)); }
+}
+
+@keyframes card-open-flash {
+  0% { transform: scale(1) rotateY(0deg); }
+  38% { transform: scale(1.06) rotateY(90deg); box-shadow: 0 0 24px rgba(66, 232, 255, 0.3); }
+  72% { transform: scale(1.1) rotateY(170deg); filter: brightness(1.6); }
+  100% { transform: scale(1.16) rotateY(180deg); filter: brightness(2); }
+}
+
+@media (max-width: 720px) {
+  .pack-choice-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pack-choice-card {
+    min-height: 220px;
   }
 }

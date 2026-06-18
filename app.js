@@ -13,6 +13,244 @@ const levels = [
   { name: "宇宙数学家", min: 6000, next: Infinity },
 ];
 
+
+const rarityBonus = {
+  Common: 0,
+  Rare: 50,
+  Epic: 120,
+  Legendary: 250,
+};
+
+const duplicateStarDust = {
+  Common: 10,
+  Rare: 30,
+  Epic: 80,
+  Legendary: 150,
+};
+
+const drawRarityTable = [
+  { rarity: "Common", weight: 45 },
+  { rarity: "Rare", weight: 30 },
+  { rarity: "Epic", weight: 20 },
+  { rarity: "Legendary", weight: 5 },
+];
+
+const solarScienceCards = [
+  {
+    id: "sun",
+    cardNo: "SR-001",
+    realmId: "solar_realm",
+    name: "Sun",
+    nameZh: "太阳",
+    category: "恒星",
+    rarity: "Legendary",
+    image: "☀️",
+    scienceIntro: "太阳是太阳系的中心恒星，提供光和热，也用强大的引力维系行星轨道。",
+    keyIdeas: ["核聚变释放能量", "太阳风会影响空间环境", "太阳质量占太阳系绝大部分"],
+    domains: { gravity: 100, orbit: 70, matter: 82, energy: 100, mystery: 86 },
+    lightNodeId: "node-sun",
+  },
+  {
+    id: "mercury",
+    cardNo: "SR-002",
+    realmId: "solar_realm",
+    name: "Mercury",
+    nameZh: "水星",
+    category: "岩石行星",
+    rarity: "Common",
+    image: "☿️",
+    scienceIntro: "水星是最靠近太阳的行星，公转很快，昼夜温差极大。",
+    keyIdeas: ["轨道周期约 88 天", "几乎没有厚大气", "表面布满撞击坑"],
+    domains: { gravity: 32, orbit: 92, matter: 70, energy: 72, mystery: 48 },
+    lightNodeId: "node-mercury",
+  },
+  {
+    id: "venus",
+    cardNo: "SR-003",
+    realmId: "solar_realm",
+    name: "Venus",
+    nameZh: "金星",
+    category: "岩石行星",
+    rarity: "Rare",
+    image: "♀️",
+    scienceIntro: "金星拥有浓厚二氧化碳大气和强烈温室效应，是太阳系最热的行星。",
+    keyIdeas: ["自转方向很特别", "云层含硫酸成分", "表面气压极高"],
+    domains: { gravity: 62, orbit: 64, matter: 84, energy: 95, mystery: 68 },
+    lightNodeId: "node-venus",
+  },
+  {
+    id: "earth",
+    cardNo: "SR-004",
+    realmId: "solar_realm",
+    name: "Earth",
+    nameZh: "地球",
+    category: "生命行星",
+    rarity: "Epic",
+    image: "🌍",
+    scienceIntro: "地球拥有液态水、活跃大气和磁场，是目前已知唯一孕育生命的星球。",
+    keyIdeas: ["液态水塑造气候和地貌", "磁场保护生命环境", "板块运动让地球持续变化"],
+    domains: { gravity: 68, orbit: 76, matter: 90, energy: 82, mystery: 92 },
+    lightNodeId: "node-earth",
+  },
+  {
+    id: "moon",
+    cardNo: "SR-005",
+    realmId: "solar_realm",
+    name: "Moon",
+    nameZh: "月球",
+    category: "天然卫星",
+    rarity: "Common",
+    image: "🌙",
+    scienceIntro: "月球是地球的天然卫星，影响潮汐，也是人类首次登陆的外星世界。",
+    keyIdeas: ["潮汐与月球引力有关", "月相来自日照角度变化", "表面保存早期撞击历史"],
+    domains: { gravity: 38, orbit: 78, matter: 64, energy: 40, mystery: 58 },
+    lightNodeId: "node-moon",
+  },
+  {
+    id: "mars",
+    cardNo: "SR-006",
+    realmId: "solar_realm",
+    name: "Mars",
+    nameZh: "火星",
+    category: "岩石行星",
+    rarity: "Rare",
+    image: "♂️",
+    scienceIntro: "火星是红色岩石行星，拥有巨型火山、峡谷和可能存在过液态水的证据。",
+    keyIdeas: ["氧化铁让火星呈红色", "极冠含冰", "探测车持续研究古环境"],
+    domains: { gravity: 46, orbit: 70, matter: 82, energy: 56, mystery: 86 },
+    lightNodeId: "node-mars",
+  },
+  {
+    id: "jupiter",
+    cardNo: "SR-007",
+    realmId: "solar_realm",
+    name: "Jupiter",
+    nameZh: "木星",
+    category: "气态巨行星",
+    rarity: "Epic",
+    image: "🟠",
+    scienceIntro: "木星是太阳系最大的行星，强大引力和大红斑风暴使它成为行星科学重点。",
+    keyIdeas: ["主要由氢和氦组成", "大红斑是巨大风暴", "拥有大量卫星"],
+    domains: { gravity: 96, orbit: 64, matter: 86, energy: 88, mystery: 82 },
+    lightNodeId: "node-jupiter",
+  },
+  {
+    id: "saturn",
+    cardNo: "SR-008",
+    realmId: "solar_realm",
+    name: "Saturn",
+    nameZh: "土星",
+    category: "环状巨行星",
+    rarity: "Epic",
+    image: "🪐",
+    scienceIntro: "土星以壮观光环闻名，光环由冰粒、岩屑和尘埃组成。",
+    keyIdeas: ["光环不是实体圆盘", "密度很低", "土卫六拥有浓厚大气"],
+    domains: { gravity: 88, orbit: 68, matter: 90, energy: 72, mystery: 86 },
+    lightNodeId: "node-saturn",
+  },
+  {
+    id: "uranus",
+    cardNo: "SR-009",
+    realmId: "solar_realm",
+    name: "Uranus",
+    nameZh: "天王星",
+    category: "冰巨行星",
+    rarity: "Rare",
+    image: "🔵",
+    scienceIntro: "天王星是一颗冰巨行星，自转轴几乎横躺，像在轨道上侧身滚动。",
+    keyIdeas: ["富含水、氨和甲烷冰", "蓝绿色来自甲烷吸收红光", "极端倾角造成特殊季节"],
+    domains: { gravity: 74, orbit: 80, matter: 82, energy: 52, mystery: 78 },
+    lightNodeId: "node-uranus",
+  },
+  {
+    id: "neptune",
+    cardNo: "SR-010",
+    realmId: "solar_realm",
+    name: "Neptune",
+    nameZh: "海王星",
+    category: "冰巨行星",
+    rarity: "Rare",
+    image: "🔷",
+    scienceIntro: "海王星是遥远的冰巨行星，拥有太阳系中极强的高速风暴。",
+    keyIdeas: ["通过引力异常被预言发现", "风速可非常惊人", "轨道周期约 165 年"],
+    domains: { gravity: 78, orbit: 82, matter: 80, energy: 78, mystery: 80 },
+    lightNodeId: "node-neptune",
+  },
+  {
+    id: "pluto",
+    cardNo: "SR-011",
+    realmId: "solar_realm",
+    name: "Pluto",
+    nameZh: "冥王星",
+    category: "矮行星",
+    rarity: "Rare",
+    image: "🟤",
+    scienceIntro: "冥王星是柯伊伯带中的矮行星，表面有冰原、山脉和复杂地貌。",
+    keyIdeas: ["轨道偏心率较大", "与卡戎形成独特系统", "新视野号揭示了丰富地貌"],
+    domains: { gravity: 28, orbit: 86, matter: 74, energy: 38, mystery: 88 },
+    lightNodeId: "node-pluto",
+  },
+  {
+    id: "asteroid_belt",
+    cardNo: "SR-012",
+    realmId: "solar_realm",
+    name: "Asteroid Belt",
+    nameZh: "小行星带",
+    category: "天体区域",
+    rarity: "Common",
+    image: "☄️",
+    scienceIntro: "小行星带位于火星和木星之间，保存着太阳系早期形成过程的线索。",
+    keyIdeas: ["包含大量岩石小天体", "谷神星是其中的矮行星", "木星引力影响其结构"],
+    domains: { gravity: 44, orbit: 76, matter: 88, energy: 34, mystery: 72 },
+    lightNodeId: "node-asteroid-belt",
+  },
+  {
+    id: "comet",
+    cardNo: "SR-013",
+    realmId: "solar_realm",
+    name: "Comet",
+    nameZh: "彗星",
+    category: "冰尘天体",
+    rarity: "Common",
+    image: "💫",
+    scienceIntro: "彗星由冰、尘埃和岩石组成，接近太阳时会形成明亮彗发和彗尾。",
+    keyIdeas: ["彗尾总大致背向太阳", "保存太阳系原始物质", "轨道可能非常 elongated"],
+    domains: { gravity: 22, orbit: 92, matter: 76, energy: 64, mystery: 82 },
+    lightNodeId: "node-comet",
+  },
+  {
+    id: "kuiper_belt",
+    cardNo: "SR-014",
+    realmId: "solar_realm",
+    name: "Kuiper Belt",
+    nameZh: "柯伊伯带",
+    category: "外太阳系区域",
+    rarity: "Epic",
+    image: "❄️",
+    scienceIntro: "柯伊伯带位于海王星外侧，包含大量冰质小天体和矮行星。",
+    keyIdeas: ["冥王星属于柯伊伯带天体", "保存太阳系外缘信息", "短周期彗星可能来自这里"],
+    domains: { gravity: 58, orbit: 88, matter: 84, energy: 36, mystery: 94 },
+    lightNodeId: "node-kuiper-belt",
+  },
+  {
+    id: "oort_cloud",
+    cardNo: "SR-015",
+    realmId: "solar_realm",
+    name: "Oort Cloud",
+    nameZh: "奥尔特云",
+    category: "假想彗星云",
+    rarity: "Legendary",
+    image: "🌌",
+    scienceIntro: "奥尔特云被认为是包围太阳系的遥远冰质天体云，可能是许多长周期彗星的来源。",
+    keyIdeas: ["距离太阳极其遥远", "尚未被直接观测确认", "连接太阳系与星际空间边界"],
+    domains: { gravity: 66, orbit: 96, matter: 78, energy: 30, mystery: 100 },
+    lightNodeId: "node-oort-cloud",
+  },
+].map((card) => ({
+  ...card,
+  sciencePower: card.domains.gravity + card.domains.orbit + card.domains.matter + card.domains.energy + card.domains.mystery + rarityBonus[card.rarity],
+}));
+
 const categories = [
   {
     id: "singleAddSub",
@@ -109,11 +347,20 @@ const state = {
   timerSeconds: 20,
   timeLeft: 20,
   timerId: null,
+  practiceStartedAt: 0,
+  totalTimerId: null,
   nextQuestionId: null,
   editingUserId: "",
+  selectedRarityFilter: "All",
+  recentLightNodeId: "",
 };
 
 let galaxyData = loadGalaxyData();
+
+
+function safeListen(element, eventName, handler) {
+  if (element) element.addEventListener(eventName, handler);
+}
 
 const els = {
   appShell: document.querySelector("#appShell"),
@@ -130,6 +377,29 @@ const els = {
   streakDaysText: document.querySelector("#streakDaysText"),
   switchUserButton: document.querySelector("#switchUserButton"),
   editCurrentUserButton: document.querySelector("#editCurrentUserButton"),
+  journeyButton: document.querySelector("#journeyButton"),
+  journeyScreen: document.querySelector("#journeyScreen"),
+  closeJourneyButton: document.querySelector("#closeJourneyButton"),
+  journeyPilotAvatar: document.querySelector("#journeyPilotAvatar"),
+  journeyPilotName: document.querySelector("#journeyPilotName"),
+  journeyProgressText: document.querySelector("#journeyProgressText"),
+  journeyTotalStars: document.querySelector("#journeyTotalStars"),
+  journeyStarDust: document.querySelector("#journeyStarDust"),
+  journeyDrawChances: document.querySelector("#journeyDrawChances"),
+  journeyDrawProgress: document.querySelector("#journeyDrawProgress"),
+  packHintText: document.querySelector("#packHintText"),
+  openPackButton: document.querySelector("#openPackButton"),
+  solarProgressBadge: document.querySelector("#solarProgressBadge"),
+  solarRealmMap: document.querySelector("#solarRealmMap"),
+  mapPreview: document.querySelector("#mapPreview"),
+  rarityFilters: document.querySelector("#rarityFilters"),
+  scienceCardGrid: document.querySelector("#scienceCardGrid"),
+  packResultModal: document.querySelector("#packResultModal"),
+  closePackResult: document.querySelector("#closePackResult"),
+  packResultContent: document.querySelector("#packResultContent"),
+  scienceCardModal: document.querySelector("#scienceCardModal"),
+  closeCardDetail: document.querySelector("#closeCardDetail"),
+  scienceCardDetail: document.querySelector("#scienceCardDetail"),
   starCount: document.querySelector("#starCount"),
   levelName: document.querySelector("#levelName"),
   nextLevelText: document.querySelector("#nextLevelText"),
@@ -160,6 +430,8 @@ const els = {
   answerInput: document.querySelector("#answerInput"),
   nextButton: document.querySelector("#nextButton"),
   timerText: document.querySelector("#timerText"),
+  totalTimeText: document.querySelector("#totalTimeText"),
+  sessionStarsText: document.querySelector("#sessionStarsText"),
   timerFill: document.querySelector("#timerFill"),
   rewardBurst: document.querySelector("#rewardBurst"),
   feedbackText: document.querySelector("#feedbackText"),
@@ -182,20 +454,30 @@ const els = {
   clearRecordsButton: document.querySelector("#clearRecordsButton"),
 };
 
-els.startButton.addEventListener("click", startPractice);
-els.restartButton.addEventListener("click", startPractice);
-els.backButton.addEventListener("click", returnToSetup);
-els.switchUserButton.addEventListener("click", showUserScreen);
-els.editCurrentUserButton.addEventListener("click", () => openEditUserModal(galaxyData.currentUserId));
-els.userCards.addEventListener("click", handleUserCardsClick);
-els.createUserForm.addEventListener("submit", handleCreateUser);
-els.cancelCreateUser.addEventListener("click", closeCreateUserModal);
-els.answerForm.addEventListener("submit", handleAnswer);
-els.answerInput.addEventListener("keydown", handleAnswerKeydown);
-els.nextButton.addEventListener("click", goToNextQuestion);
-els.clearRecordsButton.addEventListener("click", clearRecords);
-els.recordsToggle.addEventListener("click", openRecordsDrawer);
-els.recordsClose.addEventListener("click", closeRecordsDrawer);
+safeListen(els.startButton, "click", startPractice);
+safeListen(els.restartButton, "click", startPractice);
+safeListen(els.backButton, "click", returnToSetup);
+safeListen(els.switchUserButton, "click", showUserScreen);
+safeListen(els.editCurrentUserButton, "click", () => openEditUserModal(galaxyData.currentUserId));
+safeListen(els.journeyButton, "click", openJourneyScreen);
+safeListen(els.closeJourneyButton, "click", closeJourneyScreen);
+safeListen(els.openPackButton, "click", handleOpenPack);
+safeListen(els.closePackResult, "click", closePackResultModal);
+safeListen(els.packResultContent, "click", handlePackResultContentClick);
+safeListen(els.closeCardDetail, "click", closeScienceCardModal);
+safeListen(els.solarRealmMap, "click", handleSolarMapClick);
+safeListen(els.solarRealmMap, "mouseover", handleSolarMapPreview);
+safeListen(els.rarityFilters, "click", handleRarityFilter);
+safeListen(els.scienceCardGrid, "click", handleScienceCardGridClick);
+safeListen(els.userCards, "click", handleUserCardsClick);
+safeListen(els.createUserForm, "submit", handleCreateUser);
+safeListen(els.cancelCreateUser, "click", closeCreateUserModal);
+safeListen(els.answerForm, "submit", handleAnswer);
+safeListen(els.answerInput, "keydown", handleAnswerKeydown);
+safeListen(els.nextButton, "click", goToNextQuestion);
+safeListen(els.clearRecordsButton, "click", clearRecords);
+safeListen(els.recordsToggle, "click", openRecordsDrawer);
+safeListen(els.recordsClose, "click", closeRecordsDrawer);
 document.addEventListener("click", handleGlobalClick);
 
 renderCategoryOptions();
@@ -221,6 +503,7 @@ function showMainApp() {
 
 function showUserScreen() {
   clearTimer();
+  clearTotalTimer();
   clearNextQuestionDelay();
   els.appShell.classList.add("hidden");
   els.userScreen.classList.remove("hidden");
@@ -361,6 +644,7 @@ function renderPilot() {
 
 function startPractice() {
   clearTimer();
+  clearTotalTimer();
   clearNextQuestionDelay();
   const selectedCategories = getSelectedCategories();
   if (selectedCategories.length === 0) {
@@ -383,6 +667,7 @@ function startPractice() {
   state.timedOut = false;
   state.timerSeconds = Number(document.querySelector('input[name="timerSeconds"]:checked').value);
   state.timeLeft = state.timerSeconds;
+  state.practiceStartedAt = Date.now();
   state.categoryStats = Object.fromEntries(
     categories.map((category) => [
       category.id,
@@ -392,6 +677,8 @@ function startPractice() {
 
   showScreen("quiz");
   renderStats();
+  renderSessionMeta();
+  startTotalTimer();
   renderQuestion();
 }
 
@@ -471,6 +758,7 @@ function handleAnswer(event) {
     state.maxCombo = Math.max(state.maxCombo, state.combo);
     state.baseStars += question.reward;
     state.stars += reward;
+    renderSessionMeta();
     categoryStat.correct += 1;
     flashQuestion("correct");
     showRewardAnimation(reward);
@@ -484,6 +772,7 @@ function handleAnswer(event) {
     state.wrong += 1;
     state.combo = 0;
     state.stars = Math.max(0, state.stars - 1);
+    renderSessionMeta();
     categoryStat.wrong += 1;
     flashQuestion("wrong");
     showFeedback("wrong", `再想一想：这题答案是 ${question.answer}，扣 1 颗星。`);
@@ -510,7 +799,7 @@ function renderQuestion() {
   els.questionNumber.textContent = `第 ${state.currentIndex + 1} 题`;
   els.nextButton.classList.add("hidden");
   els.answerInput.disabled = false;
-  els.questionText.textContent = `${question.text} = ?`;
+  els.questionText.textContent = `${question.text} =`;
   els.rewardBurst.innerHTML = "";
   els.feedbackText.textContent = "";
   els.feedbackText.className = "feedback-text";
@@ -604,6 +893,7 @@ function startTimer() {
 }
 
 function renderTimer() {
+  renderSessionMeta();
   const percent = Math.max(0, (state.timeLeft / state.timerSeconds) * 100);
   els.timerText.textContent = `${state.timeLeft} 秒`;
   els.timerFill.style.width = `${percent}%`;
@@ -655,6 +945,34 @@ function clearTimer() {
   state.timerId = null;
 }
 
+function startTotalTimer() {
+  clearTotalTimer();
+  state.totalTimerId = window.setInterval(renderSessionMeta, 1000);
+}
+
+function clearTotalTimer() {
+  if (!state.totalTimerId) return;
+  window.clearInterval(state.totalTimerId);
+  state.totalTimerId = null;
+}
+
+function renderSessionMeta() {
+  if (els.sessionStarsText) {
+    els.sessionStarsText.textContent = `本轮星星 ${state.stars}`;
+  }
+  if (!els.totalTimeText) return;
+  const elapsedSeconds = state.practiceStartedAt
+    ? Math.floor((Date.now() - state.practiceStartedAt) / 1000)
+    : 0;
+  els.totalTimeText.textContent = `总用时 ${formatElapsedTime(elapsedSeconds)}`;
+}
+
+function formatElapsedTime(totalSeconds) {
+  const minutes = Math.floor(totalSeconds / 60).toString().padStart(2, "0");
+  const seconds = Math.max(0, totalSeconds % 60).toString().padStart(2, "0");
+  return `${minutes}:${seconds}`;
+}
+
 function clearNextQuestionDelay() {
   if (!state.nextQuestionId) return;
   window.clearTimeout(state.nextQuestionId);
@@ -663,7 +981,9 @@ function clearNextQuestionDelay() {
 
 function finishPractice() {
   clearTimer();
+  clearTotalTimer();
   clearNextQuestionDelay();
+  renderSessionMeta();
   const accuracy = Math.round((state.correct / state.totalQuestions) * 100);
   const settlement = buildSettlement(accuracy);
   const session = {
@@ -756,12 +1076,15 @@ function applyUserPracticeResult(session, settlement) {
   };
   const todayKey = getDateKey();
   const weekKey = getWeekKey();
+  const hadPracticeToday = user.practiceHistory.some((attempt) => attempt.date === todayKey);
   resetWeeklyGoalIfNeeded(user, weekKey);
+  initializeJourneyData(user);
 
   user.totalStars += settlement.totalEarned;
   user.starDust += settlement.totalEarned;
   user.weeklyGoal.earnedThisWeek += settlement.totalEarned;
   updateUserStreak(user, todayKey);
+  updateJourneyProgress(user, settlement.totalEarned, !hadPracticeToday);
   user.practiceHistory.unshift({
     id: `practice-${Date.now()}`,
     date: todayKey,
@@ -871,6 +1194,439 @@ function buildFinalMessage(accuracy, stars) {
     return `完成得不错，正确率 ${accuracy}%。再练一轮会更稳。`;
   }
   return `已经完成本轮练习，正确率 ${accuracy}%。慢慢来，先把容易错的类别练熟。`;
+}
+
+
+function createDefaultJourney() {
+  return {
+    dailyDrawChances: 0,
+    starsTowardNextDraw: 0,
+    starsEarnedToday: 0,
+    drawChancesEarnedToday: 0,
+    totalDraws: 0,
+    pityCounter: 0,
+    lastJourneyDate: getDateKey(),
+  };
+}
+
+function createDefaultRealmProgress() {
+  return {
+    solar_realm: {
+      totalCards: solarScienceCards.length,
+      unlockedCards: 0,
+      completed: false,
+      completedAt: null,
+    },
+  };
+}
+
+function initializeJourneyData(user) {
+  user.journey = { ...createDefaultJourney(), ...(user.journey ?? {}) };
+  user.cardCollection = user.cardCollection ?? {};
+  user.realmProgress = { ...createDefaultRealmProgress(), ...(user.realmProgress ?? {}) };
+  user.realmProgress.solar_realm = {
+    ...createDefaultRealmProgress().solar_realm,
+    ...(user.realmProgress.solar_realm ?? {}),
+  };
+  const todayKey = getDateKey();
+  if (user.journey.lastJourneyDate !== todayKey) {
+    user.journey.starsEarnedToday = 0;
+    user.journey.drawChancesEarnedToday = 0;
+    user.journey.lastJourneyDate = todayKey;
+  }
+  refreshRealmProgress(user);
+}
+
+function refreshRealmProgress(user) {
+  const unlockedCards = solarScienceCards.filter((card) => user.cardCollection?.[card.id]?.owned).length;
+  const progress = user.realmProgress.solar_realm;
+  progress.totalCards = solarScienceCards.length;
+  progress.unlockedCards = unlockedCards;
+  if (unlockedCards >= solarScienceCards.length && !progress.completed) {
+    progress.completed = true;
+    progress.completedAt = new Date().toISOString();
+  }
+}
+
+function updateJourneyProgress(user, starsEarned, isFirstPracticeToday) {
+  initializeJourneyData(user);
+  const journey = user.journey;
+  journey.starsEarnedToday += starsEarned;
+
+  if (isFirstPracticeToday) {
+    journey.dailyDrawChances += 1;
+  }
+
+  if (journey.drawChancesEarnedToday < 5) {
+    journey.starsTowardNextDraw += starsEarned;
+    while (journey.starsTowardNextDraw >= 100 && journey.drawChancesEarnedToday < 5) {
+      journey.starsTowardNextDraw -= 100;
+      journey.drawChancesEarnedToday += 1;
+      journey.dailyDrawChances += 1;
+    }
+  }
+
+  if (isFirstPracticeToday) {
+    if ((user.streakDays || 0) > 0 && user.streakDays % 7 === 0) {
+      journey.dailyDrawChances += 3;
+    } else if ((user.streakDays || 0) > 0 && user.streakDays % 3 === 0) {
+      journey.dailyDrawChances += 1;
+    }
+  }
+}
+
+function openJourneyScreen() {
+  const user = getCurrentUser();
+  if (!user) return;
+  initializeJourneyData(user);
+  saveGalaxyData();
+  renderJourneyScreen();
+  els.journeyScreen.classList.remove("hidden");
+}
+
+function closeJourneyScreen() {
+  els.journeyScreen.classList.add("hidden");
+  state.recentLightNodeId = "";
+}
+
+function renderJourneyScreen() {
+  const user = getCurrentUser();
+  if (!user) return;
+  initializeJourneyData(user);
+  const progress = user.realmProgress.solar_realm;
+  els.journeyPilotAvatar.textContent = user.avatar;
+  els.journeyPilotName.textContent = `${user.name}的星际之旅`;
+  els.journeyTotalStars.textContent = user.totalStars;
+  els.journeyStarDust.textContent = user.starDust;
+  els.journeyDrawChances.textContent = user.journey.dailyDrawChances;
+  els.journeyDrawProgress.textContent = `${user.journey.starsTowardNextDraw} / 100`;
+  els.journeyProgressText.textContent = `太阳星域 ${progress.unlockedCards} / ${progress.totalCards}`;
+  els.solarProgressBadge.textContent = progress.completed
+    ? "太阳星域科学图鉴完成"
+    : `${progress.unlockedCards} / ${progress.totalCards}`;
+  els.openPackButton.disabled = user.journey.dailyDrawChances <= 0;
+  els.packHintText.textContent = user.journey.dailyDrawChances > 0
+    ? `还有 ${user.journey.dailyDrawChances} 次科学星光探索机会。`
+    : "完成练习获得更多探索机会";
+  renderSolarRealmMap(user);
+  renderScienceCardGrid(user);
+}
+
+function renderSolarRealmMap(user) {
+  els.solarRealmMap.innerHTML = solarScienceCards.map((card, index) => {
+    const entry = user.cardCollection[card.id];
+    const unlocked = Boolean(entry?.owned);
+    const active = state.recentLightNodeId === card.lightNodeId ? " is-new-light" : "";
+    return `
+      <button class="solar-node realm-node ${unlocked ? "unlocked" : "locked"} ${card.rarity.toLowerCase()}${active}" type="button" data-card-id="${card.id}" style="--node-index: ${index}">
+        <span class="realm-node-core">${unlocked ? card.image : "?"}</span>
+        <strong>${card.nameZh}</strong>
+        <small>${card.rarity}</small>
+      </button>
+    `;
+  }).join("");
+}
+
+function renderScienceCardGrid(user) {
+  const filter = state.selectedRarityFilter;
+  els.scienceCardGrid.innerHTML = solarScienceCards
+    .filter((card) => filter === "All" || card.rarity === filter)
+    .map((card) => {
+      const entry = user.cardCollection[card.id];
+      const unlocked = Boolean(entry?.owned);
+      return renderScienceCardFace(card, entry, unlocked, { compact: true, asButton: true });
+    }).join("");
+}
+
+function renderScienceCardFace(card, entry, unlocked, options = {}) {
+  const tagName = options.asButton ? "button" : "div";
+  const buttonAttrs = options.asButton ? `type="button" data-card-id="${card.id}"` : "";
+  const compactClass = options.compact ? " is-compact" : "";
+  const ownedClass = unlocked ? "is-owned" : "is-unknown";
+  const title = unlocked ? `${card.nameZh} ${card.name}` : "Unknown Celestial File";
+  const subtitle = unlocked ? `${card.category} · Solar Realm` : "Solar Realm Collection";
+  const intro = unlocked ? card.scienceIntro : `尚未点亮 ${card.nameZh} 的星体档案。开启科学星光包，解锁这份宇宙科学档案。`;
+  const ideas = unlocked ? card.keyIdeas.slice(0, options.compact ? 3 : 4) : ["未发现", "科学档案", "等待点亮"];
+  const image = unlocked ? card.image : "◎";
+  const countText = unlocked ? `Lv.${entry.level} · ×${entry.count}${entry.isShiny ? " · Shiny" : ""}` : "LOCKED";
+
+  return `
+    <${tagName} class="science-card solar-science-card card-${card.rarity.toLowerCase()} ${ownedClass}${compactClass}" ${buttonAttrs}>
+      <div class="card-constellation" aria-hidden="true"></div>
+      <div class="card-orbit-ring" aria-hidden="true"></div>
+      <div class="card-topline">
+        <span class="rarity-badge">${card.rarity}</span>
+        <span class="card-no">${card.cardNo}</span>
+      </div>
+      <div class="card-image-area">
+        <span class="planet-image ${card.rarity.toLowerCase()}">${image}</span>
+      </div>
+      <div class="card-title-block">
+        <strong class="card-title">${title}</strong>
+        <span class="card-category">${subtitle}</span>
+      </div>
+      <p class="science-intro">${intro}</p>
+      <div class="key-ideas">
+        ${ideas.map((idea) => `<span class="key-idea-pill">${idea}</span>`).join("")}
+      </div>
+      ${unlocked ? renderDomainRows(card, options.compact) : renderCardBackMini()}
+      <div class="science-power">
+        <span class="science-power-label">Science Power</span>
+        <strong class="science-power-value">${unlocked ? card.sciencePower : "???"}</strong>
+      </div>
+      <div class="collection-meta">${countText}</div>
+    </${tagName}>
+  `;
+}
+
+function renderCardBackMini() {
+  return `
+    <div class="card-back-mini">
+      <span>Solar</span>
+      <strong>Science Cards</strong>
+      <em>My Stellar Journey</em>
+    </div>
+  `;
+}
+
+function renderDomainRows(card, compact = false) {
+  const rows = [
+    ["gravity", "🌀", "Gravity"],
+    ["orbit", "⭕", "Orbit"],
+    ["matter", "◈", "Matter"],
+    ["energy", "⚡", "Energy"],
+    ["mystery", "✦", "Mystery"],
+  ];
+  const visibleRows = compact ? rows.slice(0, 3) : rows;
+  return `
+    <div class="domain-rows">
+      ${visibleRows.map(([key, icon, label]) => `
+        <div class="domain-row">
+          <span class="domain-label">${icon} ${label}</span>
+          <span class="domain-value">${card.domains[key]}</span>
+          <span class="domain-bar"><i class="domain-fill" style="width: ${card.domains[key]}%"></i></span>
+        </div>
+      `).join("")}
+    </div>
+  `;
+}
+
+function handleOpenPack() {
+  const user = getCurrentUser();
+  if (!user) return;
+  initializeJourneyData(user);
+  if (user.journey.dailyDrawChances <= 0) {
+    els.packHintText.textContent = "完成练习获得更多探索机会";
+    renderJourneyScreen();
+    return;
+  }
+  showPackChoice();
+}
+
+function showPackChoice() {
+  els.packResultContent.innerHTML = `
+    <div class="pack-choice-scene">
+      <p class="eyebrow">Start a Science Discovery</p>
+      <h2 id="packResultTitle">选择一张科学星光卡</h2>
+      <p>三张卡背后连接同一个太阳星域星光包。选中一张，开启你的宇宙科学档案。</p>
+      <div class="pack-choice-grid" aria-label="选择科学星光包中的一张卡">
+        ${[0, 1, 2].map((index) => `
+          <button class="pack-choice-card" type="button" data-pack-choice="${index + 1}" style="--choice-index: ${index}">
+            ${renderScienceCardBack(index + 1)}
+          </button>
+        `).join("")}
+      </div>
+      <small class="pack-choice-hint">点击其中一张卡，星光会翻开你的发现。</small>
+    </div>
+  `;
+  els.packResultModal.classList.remove("hidden");
+}
+
+function renderScienceCardBack(index) {
+  return `
+    <span class="choice-card-back">
+      <i></i>
+      <strong>Solar<br>Science<br>Cards</strong>
+      <em>My Stellar Journey</em>
+      <small>Discovery ${index}</small>
+    </span>
+  `;
+}
+
+function handlePackResultContentClick(event) {
+  const choice = event.target.closest("[data-pack-choice]");
+  if (!choice || choice.disabled) return;
+  const user = getCurrentUser();
+  if (!user) return;
+  [...els.packResultContent.querySelectorAll("[data-pack-choice]")].forEach((button) => {
+    button.disabled = true;
+    button.classList.toggle("is-selected", button === choice);
+    button.classList.toggle("is-faded", button !== choice);
+  });
+  choice.classList.add("is-opening");
+  window.setTimeout(() => {
+    const result = drawSolarScienceCard(user);
+    saveGalaxyData();
+    renderGrowth();
+    renderJourneyScreen();
+    showPackResult(result, choice.dataset.packChoice);
+  }, 820);
+}
+
+function drawSolarScienceCard(user) {
+  initializeJourneyData(user);
+  user.journey.dailyDrawChances -= 1;
+  user.journey.totalDraws += 1;
+  const forceHighRarity = user.journey.pityCounter >= 9;
+  const rarity = forceHighRarity ? pickWeightedRarity([
+    { rarity: "Epic", weight: 80 },
+    { rarity: "Legendary", weight: 20 },
+  ]) : pickWeightedRarity(drawRarityTable);
+  const card = pickWeightedCardByRarity(user, rarity);
+  const entry = user.cardCollection[card.id];
+  const isNew = !entry?.owned;
+  let dustGained = 0;
+
+  if (isNew) {
+    user.cardCollection[card.id] = {
+      owned: true,
+      count: 1,
+      level: 1,
+      isShiny: false,
+      firstCollectedAt: new Date().toISOString(),
+      lastCollectedAt: new Date().toISOString(),
+    };
+    state.recentLightNodeId = card.lightNodeId;
+  } else {
+    entry.count += 1;
+    entry.level = Math.max(entry.level || 1, entry.count >= 3 ? 2 : 1);
+    if (entry.count >= 6) entry.level = Math.max(entry.level, 3);
+    if (entry.count >= 5) entry.isShiny = true;
+    entry.lastCollectedAt = new Date().toISOString();
+    dustGained = duplicateStarDust[card.rarity];
+    user.starDust += dustGained;
+  }
+
+  user.journey.pityCounter = ["Epic", "Legendary"].includes(card.rarity) ? 0 : user.journey.pityCounter + 1;
+  refreshRealmProgress(user);
+  return { card, isNew, dustGained, entry: user.cardCollection[card.id] };
+}
+
+function pickWeightedRarity(table) {
+  const total = table.reduce((sum, item) => sum + item.weight, 0);
+  let roll = Math.random() * total;
+  for (const item of table) {
+    roll -= item.weight;
+    if (roll <= 0) return item.rarity;
+  }
+  return table[table.length - 1].rarity;
+}
+
+function pickWeightedCardByRarity(user, rarity) {
+  const pool = solarScienceCards.filter((card) => card.rarity === rarity);
+  const weighted = pool.map((card) => {
+    const owned = Boolean(user.cardCollection[card.id]?.owned);
+    const unownedCount = solarScienceCards.filter((item) => !user.cardCollection[item.id]?.owned).length;
+    return { card, weight: owned ? 1 : (unownedCount >= 5 ? 4 : 2.5) };
+  });
+  const total = weighted.reduce((sum, item) => sum + item.weight, 0);
+  let roll = Math.random() * total;
+  for (const item of weighted) {
+    roll -= item.weight;
+    if (roll <= 0) return item.card;
+  }
+  return weighted[weighted.length - 1].card;
+}
+
+function showPackResult(result, choiceNumber = "") {
+  const { card, isNew, dustGained, entry } = result;
+  els.packResultContent.innerHTML = `
+    <div class="pack-result-heading">
+      <p class="eyebrow">${choiceNumber ? `Discovery ${choiceNumber} · ` : ""}${isNew ? "New Discovery! 新发现一个宇宙知识点！" : "Science File Upgraded 科学档案升级"}</p>
+      <h2 id="packResultTitle">${isNew ? "Celestial Archive Activated 星体档案已点亮" : "星体研究进度提升"}</h2>
+      <p>${isNew ? "太阳星域地图中对应节点已经点亮。" : `转化为星尘 +${dustGained}，科学档案研究等级提升。`}</p>
+    </div>
+    <div class="drawn-card-wrap">
+      ${renderScienceCardFace(card, entry, true, { compact: false, asButton: false })}
+    </div>
+  `;
+  els.packResultModal.classList.remove("hidden");
+}
+
+function closePackResultModal() {
+  els.packResultModal.classList.add("hidden");
+}
+
+function handleSolarMapClick(event) {
+  const node = event.target.closest("[data-card-id]");
+  if (!node) return;
+  showScienceCardDetail(node.dataset.cardId);
+}
+
+function handleSolarMapPreview(event) {
+  const node = event.target.closest("[data-card-id]");
+  if (!node) return;
+  const user = getCurrentUser();
+  const card = getSolarCard(node.dataset.cardId);
+  const owned = Boolean(user?.cardCollection?.[card.id]?.owned);
+  els.mapPreview.innerHTML = owned
+    ? `<strong>${card.image} ${card.nameZh}</strong><span>${card.category} · ${card.rarity} · Science Power ${card.sciencePower}</span>`
+    : `<strong>未点亮星体</strong><span>开启科学星光包，发现 ${card.nameZh} 的科学档案。</span>`;
+}
+
+function handleRarityFilter(event) {
+  const button = event.target.closest("[data-rarity]");
+  if (!button) return;
+  state.selectedRarityFilter = button.dataset.rarity;
+  [...els.rarityFilters.querySelectorAll("button")].forEach((item) => item.classList.toggle("is-active", item === button));
+  renderScienceCardGrid(getCurrentUser());
+}
+
+function handleScienceCardGridClick(event) {
+  const cardButton = event.target.closest("[data-card-id]");
+  if (!cardButton) return;
+  showScienceCardDetail(cardButton.dataset.cardId);
+}
+
+function showScienceCardDetail(cardId) {
+  const user = getCurrentUser();
+  const card = getSolarCard(cardId);
+  const entry = user?.cardCollection?.[cardId];
+  const owned = Boolean(entry?.owned);
+  els.scienceCardDetail.innerHTML = `
+    <div class="card-detail-layout ${owned ? "" : "is-locked"}">
+      <div class="detail-card-preview">
+        ${renderScienceCardFace(card, entry, owned, { compact: false, asButton: false })}
+      </div>
+      <div class="detail-science-file">
+        <p class="eyebrow">Solar Science Cards · ${card.cardNo}</p>
+        <h2 id="cardDetailTitle">${owned ? `${card.nameZh} / ${card.name}` : "Locked Science Card"}</h2>
+        <strong>${card.category} · ${card.rarity}</strong>
+        <p>${owned ? card.scienceIntro : `尚未点亮 ${card.nameZh} 的星体档案。完成练习获得探索机会，开启科学星光包来发现它。`}</p>
+        ${owned ? renderDomainBars(card) : ""}
+        ${owned ? `<div class="detail-key-ideas">${card.keyIdeas.map((idea) => `<span class="key-idea-pill">${idea}</span>`).join("")}</div>` : ""}
+        ${owned ? `<div class="detail-meta"><span>Science Power ${card.sciencePower}</span><span>count ×${entry.count}</span><span>level ${entry.level}</span><span>${entry.isShiny ? "Shiny" : "普通档案"}</span><span>首次获得 ${formatDateTime(entry.firstCollectedAt)}</span></div>` : ""}
+      </div>
+    </div>
+  `;
+  els.scienceCardModal.classList.remove("hidden");
+}
+
+function renderDomainBars(card) {
+  return renderDomainRows(card, false);
+}
+
+function closeScienceCardModal() {
+  els.scienceCardModal.classList.add("hidden");
+}
+
+function getSolarCard(cardId) {
+  return solarScienceCards.find((card) => card.id === cardId) ?? solarScienceCards[0];
+}
+
+function formatDateTime(value) {
+  if (!value) return "-";
+  return new Date(value).toLocaleString("zh-CN", { month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" });
 }
 
 function renderRecords() {
@@ -990,6 +1746,7 @@ function showScreen(screen) {
 
 function returnToSetup() {
   clearTimer();
+  clearTotalTimer();
   clearNextQuestionDelay();
   showScreen("welcome");
   renderStats();
@@ -1040,6 +1797,7 @@ function normalizeGalaxyData(data) {
     normalized.practiceHistory = normalized.practiceHistory ?? [];
     normalized.unlockedBadges = normalized.unlockedBadges ?? [];
     normalized.unlockedPlanets = normalized.unlockedPlanets ?? [];
+    initializeJourneyData(normalized);
     resetWeeklyGoalIfNeeded(normalized, getWeekKey());
     return normalized;
   });
@@ -1143,6 +1901,9 @@ function createEmptyUser({ name, grade, avatar }) {
     unlockedBadges: [],
     unlockedPlanets: [],
     practiceHistory: [],
+    journey: createDefaultJourney(),
+    cardCollection: {},
+    realmProgress: createDefaultRealmProgress(),
   };
 }
 

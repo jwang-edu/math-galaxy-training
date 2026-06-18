@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="Blue galaxy planet with rocket and stars">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="70%">
+      <stop offset="0" stop-color="#133a75"/>
+      <stop offset="0.42" stop-color="#0b2551"/>
+      <stop offset="1" stop-color="#071630"/>
+    </radialGradient>
+    <radialGradient id="planet" cx="32%" cy="25%" r="72%">
+      <stop offset="0" stop-color="#eaffff"/>
+      <stop offset="0.12" stop-color="#65eeff"/>
+      <stop offset="0.42" stop-color="#0f85ff"/>
+      <stop offset="0.78" stop-color="#0d39c7"/>
+      <stop offset="1" stop-color="#061b6b"/>
+    </radialGradient>
+    <linearGradient id="ringBlue" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#18e5ff"/>
+      <stop offset="0.5" stop-color="#eafcff"/>
+      <stop offset="1" stop-color="#176dff"/>
+    </linearGradient>
+    <linearGradient id="ringGold" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffe18b" stop-opacity="0"/>
+      <stop offset="0.42" stop-color="#fff6c8"/>
+      <stop offset="1" stop-color="#ffb84f"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="16"/>
+    </filter>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <g opacity=".9">
+    <circle cx="382" cy="262" r="3" fill="#ffd96d"/>
+    <circle cx="1020" cy="164" r="5" fill="#37c5ff" filter="url(#glow)"/>
+    <circle cx="306" cy="520" r="5" fill="#37c5ff" filter="url(#glow)"/>
+    <circle cx="1294" cy="538" r="6" fill="#72dcff" filter="url(#glow)"/>
+    <circle cx="725" cy="154" r="3" fill="#37c5ff"/>
+    <circle cx="1210" cy="223" r="5" fill="#ffdca6" filter="url(#glow)"/>
+    <circle cx="1324" cy="282" r="2" fill="#8fefff"/>
+    <circle cx="1134" cy="720" r="3" fill="#37c5ff"/>
+    <circle cx="500" cy="814" r="4" fill="#37c5ff" filter="url(#glow)"/>
+  </g>
+  <g transform="translate(360 152)" opacity=".76" fill="none" stroke="#24bfff" stroke-width="1.4">
+    <circle cx="440" cy="298" r="320"/>
+    <circle cx="440" cy="298" r="260" stroke-dasharray="6 18"/>
+    <path d="M440 0v596M142 298h596" stroke-dasharray="10 18"/>
+    <path d="M440 -20l14 30h-28zM440 616l-14-30h28z" fill="#24bfff" opacity=".8"/>
+  </g>
+  <ellipse cx="800" cy="476" rx="635" ry="178" fill="none" stroke="#28d8ff" stroke-width="5" opacity=".95" transform="rotate(-13 800 476)" filter="url(#glow)"/>
+  <ellipse cx="800" cy="478" rx="562" ry="116" fill="none" stroke="#207aff" stroke-width="2" opacity=".55" transform="rotate(-13 800 478)"/>
+  <ellipse cx="800" cy="514" rx="502" ry="94" fill="none" stroke="url(#ringGold)" stroke-width="4" opacity=".92" transform="rotate(-13 800 514)" filter="url(#glow)"/>
+  <g filter="url(#glow)">
+    <circle cx="804" cy="462" r="266" fill="url(#planet)"/>
+    <circle cx="690" cy="318" r="42" fill="#fff" opacity=".68" filter="url(#soft)"/>
+    <path d="M602 390c155-94 325-122 455-54" fill="none" stroke="#73e7ff" stroke-width="3" opacity=".34"/>
+    <path d="M570 495c138-75 385-118 520-34" fill="none" stroke="#50c4ff" stroke-width="2" opacity=".28"/>
+    <path d="M666 637c170-18 296-82 386-190" fill="none" stroke="#168dff" stroke-width="2" opacity=".32"/>
+    <path d="M585 263c166 24 275 7 390 56" fill="none" stroke="#e6fbff" stroke-width="4" opacity=".18"/>
+  </g>
+  <ellipse cx="800" cy="476" rx="635" ry="178" fill="none" stroke="url(#ringBlue)" stroke-width="8" opacity=".82" transform="rotate(-13 800 476)" filter="url(#glow)"/>
+  <path d="M1132 284c90-58 161-82 206-80-18 38-55 86-134 144z" fill="#d9f6ff" stroke="#69c7ff" stroke-width="3" filter="url(#glow)"/>
+  <path d="M1195 249l98-37-38 96z" fill="#1b68ff"/>
+  <path d="M1258 212l64-13-13 63z" fill="#5ee6ff"/>
+  <path d="M1168 306l-46 52 70-22z" fill="#2ba8ff"/>
+  <path d="M1222 337l-18 70 50-49z" fill="#2ba8ff"/>
+  <path d="M1068 352c58-28 92-55 124-90" stroke="#37c5ff" stroke-width="12" stroke-linecap="round" opacity=".8" filter="url(#glow)"/>
+  <g fill="#ffd866" filter="url(#glow)">
+    <path d="M356 344l24 48 53 8-38 37 9 52-48-25-47 25 9-52-38-37 52-8z"/>
+    <path d="M1242 640l28 56 62 9-45 43 11 61-56-29-55 29 10-61-45-43 62-9z"/>
+    <path d="M578 274l10 20 22 3-16 15 4 22-20-11-20 11 4-22-16-15 22-3z"/>
+  </g>
+</svg>
