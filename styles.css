@@ -2501,3 +2501,402 @@ button.solar-science-card {
     height: 120px;
   }
 }
+
+
+/* Responsive polish for mixed device sizes */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
+}
+
+.topbar > *,
+.quiz-topline > *,
+.question-meta > *,
+.section-title-row > *,
+.stellar-pack-panel > *,
+.records-header > * {
+  min-width: 0;
+}
+
+@media (max-width: 1180px) {
+  .app-shell {
+    width: min(100% - 24px, 1240px);
+    grid-template-columns: minmax(0, 1fr) minmax(290px, 330px);
+    gap: 16px;
+  }
+
+  .practice-panel,
+  .records-panel {
+    padding: 20px;
+  }
+
+  .topbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .star-wallet {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .hero-art {
+    width: min(680px, 100%);
+  }
+}
+
+@media (max-width: 980px) {
+  .app-shell {
+    width: min(100% - 20px, 900px);
+  }
+
+  .records-panel {
+    width: 100%;
+  }
+
+  .category-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .settlement-grid,
+  .category-summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .journey-screen {
+    padding: 18px;
+  }
+
+  .solar-realm-map {
+    grid-template-columns: repeat(15, minmax(70px, 1fr));
+    min-height: 250px;
+    padding: 22px 14px;
+  }
+
+  .solar-node {
+    min-width: 70px;
+    min-height: 136px;
+  }
+}
+
+@media (max-width: 760px) {
+  h1 {
+    font-size: clamp(1.9rem, 9vw, 2.7rem);
+  }
+
+  h2 {
+    font-size: clamp(1.35rem, 7vw, 2rem);
+  }
+
+  .user-screen {
+    padding: 16px 10px;
+    place-items: start center;
+  }
+
+  .user-gate,
+  .create-user-card,
+  .science-modal-card {
+    border-radius: 18px;
+    padding: 18px;
+  }
+
+  .modal-backdrop {
+    padding: 12px;
+    align-items: start;
+    overflow: auto;
+  }
+
+  .topbar,
+  .records-header,
+  .question-meta,
+  .quiz-topline,
+  .settlement-header,
+  .section-title-row,
+  .stellar-pack-panel,
+  .journey-header {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .pilot-strip {
+    align-items: stretch;
+    border-radius: 16px;
+  }
+
+  .pilot-strip .ghost-button,
+  .journey-header .ghost-button,
+  .stellar-pack-panel .primary-button,
+  .section-title-row .mini-action {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .star-wallet {
+    grid-template-columns: 1fr;
+  }
+
+  .star-core {
+    min-height: 76px;
+    min-width: 0;
+  }
+
+  .growth-row,
+  .record-top,
+  .card-topline,
+  .science-power {
+    flex-wrap: wrap;
+  }
+
+  .hero-art {
+    width: 100%;
+    border-radius: 18px;
+  }
+
+  .welcome-screen {
+    min-height: auto;
+    justify-content: flex-start;
+  }
+
+  .category-list,
+  .user-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .timer-options,
+  .pill-options {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .question-meta,
+  .quiz-orbit {
+    justify-content: flex-start;
+  }
+
+  .question-meta span,
+  .quiz-orbit span {
+    flex: 1 1 140px;
+    text-align: center;
+  }
+
+  .question-text {
+    min-height: 156px;
+    padding: 16px;
+    font-size: clamp(2.35rem, 15vw, 4rem);
+    word-break: break-word;
+  }
+
+  .answer-row {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .answer-row input {
+    min-height: 58px;
+    font-size: 1.55rem;
+  }
+
+  .answer-row .primary-button,
+  .answer-row .secondary-button {
+    width: 100%;
+  }
+
+  .attempt-item {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  .attempt-item em {
+    text-align: left;
+  }
+
+  .journey-screen {
+    padding: 12px;
+  }
+
+  .journey-dashboard {
+    grid-template-columns: 1fr;
+  }
+
+  .pilot-journey-card {
+    grid-column: auto;
+  }
+
+  .solar-realm-map {
+    min-height: 210px;
+    grid-template-columns: repeat(15, minmax(64px, 1fr));
+    gap: 8px;
+    padding: 18px 12px;
+  }
+
+  .solar-node {
+    min-width: 64px;
+    min-height: 124px;
+    transform: none;
+  }
+
+  .solar-node:hover {
+    transform: translateY(-4px);
+  }
+
+  .solar-node span {
+    width: 40px;
+    height: 40px;
+  }
+
+  .rarity-filters {
+    justify-content: flex-start;
+  }
+
+  .rarity-filters .mini-action {
+    flex: 1 1 120px;
+    justify-content: center;
+  }
+
+  .science-card-grid {
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  }
+
+  .card-detail-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-science-file .domain-row,
+  .domain-row {
+    grid-template-columns: minmax(72px, 1fr) 34px minmax(82px, 1.5fr);
+  }
+}
+
+@media (max-width: 520px) {
+  .app-shell {
+    width: min(100% - 12px, 520px);
+    padding-top: 6px;
+  }
+
+  .practice-panel {
+    padding: 14px;
+    border-radius: 16px;
+  }
+
+  .practice-panel::before {
+    display: none;
+  }
+
+  .hero-art {
+    aspect-ratio: 4 / 3;
+  }
+
+  .category-list span {
+    min-height: 112px;
+    padding: 14px;
+  }
+
+  .category-list strong {
+    max-width: calc(100% - 42px);
+  }
+
+  .timer-options,
+  .pill-options,
+  .stats-grid,
+  .settlement-grid,
+  .category-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-grid > div,
+  .settlement-grid > div {
+    min-height: 62px;
+  }
+
+  .question-text {
+    min-height: 136px;
+    font-size: clamp(2rem, 16vw, 3.35rem);
+  }
+
+  .reward-label {
+    max-width: calc(100vw - 48px);
+    min-width: 0;
+    white-space: normal;
+  }
+
+  .records-panel {
+    padding: 16px;
+  }
+
+  .records-toggle {
+    right: 10px;
+    bottom: 10px;
+  }
+
+  .science-modal-card {
+    width: 100%;
+    max-height: calc(100vh - 24px);
+    padding: 18px 14px;
+  }
+
+  .result-card-modal {
+    padding-top: 46px;
+  }
+
+  .pack-choice-grid {
+    gap: 12px;
+  }
+
+  .pack-choice-card {
+    min-height: 190px;
+  }
+
+  .choice-card-back strong {
+    font-size: 0.92rem;
+  }
+
+  .solar-science-card {
+    width: min(100%, 230px);
+  }
+
+  .solar-realm-map {
+    margin-left: -2px;
+    margin-right: -2px;
+  }
+}
+
+@media (max-width: 380px) {
+  .user-gate,
+  .practice-panel,
+  .records-panel,
+  .journey-header,
+  .stellar-pack-panel,
+  .solar-map-section,
+  .science-card-section {
+    padding: 12px;
+  }
+
+  .primary-button,
+  .secondary-button,
+  .ghost-button {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .question-text {
+    font-size: clamp(1.75rem, 15vw, 2.85rem);
+  }
+
+  .science-card-grid {
+    grid-template-columns: 1fr;
+  }
+}
