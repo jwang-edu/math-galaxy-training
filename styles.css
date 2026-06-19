@@ -2900,3 +2900,330 @@ canvas {
     grid-template-columns: 1fr;
   }
 }
+
+
+/* Stellar Journey responsive refinement */
+.journey-screen {
+  overscroll-behavior: contain;
+}
+
+.journey-shell,
+.solar-map-section,
+.science-card-section,
+.science-modal-card,
+.pack-choice-scene,
+.drawn-card-wrap,
+.detail-card-preview {
+  min-width: 0;
+}
+
+.solar-map-section,
+.science-card-section {
+  overflow: hidden;
+}
+
+.solar-realm-map {
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+}
+
+.science-card-grid {
+  justify-items: center;
+}
+
+.solar-science-card {
+  max-width: 100%;
+}
+
+@media (max-width: 1100px) {
+  .journey-dashboard {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .pilot-journey-card {
+    grid-column: 1 / -1;
+  }
+
+  .science-card-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+
+  .pack-choice-grid {
+    grid-template-columns: repeat(3, minmax(140px, 1fr));
+    gap: 14px;
+  }
+
+  .pack-choice-card {
+    min-height: 250px;
+  }
+}
+
+@media (max-width: 820px) {
+  .journey-screen {
+    padding: 12px;
+  }
+
+  .journey-shell {
+    gap: 14px;
+  }
+
+  .journey-header,
+  .stellar-pack-panel,
+  .solar-map-section,
+  .science-card-section {
+    padding: 16px;
+    border-radius: 16px;
+  }
+
+  .journey-dashboard {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .journey-dashboard > div {
+    min-height: 82px;
+    padding: 14px;
+  }
+
+  .journey-dashboard strong {
+    font-size: 1.25rem;
+  }
+
+  .pilot-journey-card {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .section-title-row,
+  .journey-header,
+  .stellar-pack-panel {
+    align-items: stretch;
+  }
+
+  .solar-realm-map {
+    min-height: auto;
+    grid-template-columns: repeat(5, minmax(76px, 1fr));
+    overflow-x: visible;
+    gap: 10px;
+    padding: 16px;
+  }
+
+  .solar-node,
+  .solar-node:hover {
+    min-width: 0;
+    min-height: 118px;
+    border-radius: 20px;
+    transform: none;
+  }
+
+  .solar-node strong,
+  .solar-node small {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    text-align: center;
+  }
+
+  .map-preview {
+    overflow-wrap: anywhere;
+  }
+
+  .rarity-filters {
+    justify-content: stretch;
+  }
+
+  .rarity-filters .mini-action {
+    flex: 1 1 calc(50% - 8px);
+    justify-content: center;
+  }
+
+  .science-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .solar-science-card {
+    width: min(100%, 250px);
+    min-height: 360px;
+  }
+
+  .science-modal-card {
+    width: min(100%, 680px);
+    max-height: calc(100dvh - 24px);
+  }
+
+  .card-detail-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .pack-choice-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .pack-choice-card {
+    min-height: 220px;
+  }
+
+  .choice-card-back {
+    border-radius: 18px;
+  }
+
+  .choice-card-back strong {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 620px) {
+  .journey-screen {
+    padding: 8px;
+  }
+
+  .journey-header,
+  .stellar-pack-panel,
+  .solar-map-section,
+  .science-card-section {
+    padding: 14px;
+  }
+
+  .journey-dashboard {
+    grid-template-columns: 1fr;
+  }
+
+  .journey-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 16px;
+    font-size: 1.7rem;
+  }
+
+  .solar-realm-map {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    padding: 12px;
+  }
+
+  .solar-node {
+    min-height: 112px;
+    padding: 9px 6px;
+  }
+
+  .solar-node span {
+    width: 42px;
+    height: 42px;
+  }
+
+  .section-title-row #solarProgressBadge {
+    width: 100%;
+    text-align: center;
+  }
+
+  .rarity-filters .mini-action {
+    flex-basis: 100%;
+  }
+
+  .science-card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .solar-science-card {
+    width: min(100%, 270px);
+    min-height: 370px;
+  }
+
+  .science-modal-card {
+    max-height: calc(100dvh - 16px);
+    padding: 16px;
+  }
+
+  .pack-choice-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pack-choice-card {
+    min-height: 178px;
+  }
+
+  .choice-card-back {
+    position: relative;
+    min-height: 178px;
+  }
+
+  .choice-card-back i {
+    width: 58px;
+    height: 58px;
+  }
+
+  .choice-card-back::after {
+    width: 132px;
+    height: 56px;
+  }
+
+  .detail-science-file .domain-row,
+  .domain-row {
+    grid-template-columns: 1fr 34px;
+  }
+
+  .detail-science-file .domain-bar,
+  .domain-bar {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 420px) {
+  .journey-header h1 {
+    font-size: clamp(1.65rem, 12vw, 2.2rem);
+  }
+
+  .journey-dashboard > div,
+  .stellar-pack-panel,
+  .solar-map-section,
+  .science-card-section {
+    border-radius: 14px;
+  }
+
+  .solar-realm-map {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .solar-node {
+    min-height: 104px;
+  }
+
+  .solar-science-card {
+    width: 100%;
+    min-height: 348px;
+    padding: 12px;
+  }
+
+  .card-image-area {
+    height: 116px;
+  }
+
+  .planet-image,
+  .planet-fallback {
+    width: 98px;
+    height: 98px;
+  }
+
+  .planet-image.legendary,
+  .planet-fallback.legendary {
+    width: 110px;
+    height: 110px;
+  }
+
+  .science-intro {
+    min-height: auto;
+  }
+
+  .key-ideas {
+    gap: 5px;
+  }
+
+  .key-idea-pill {
+    font-size: 0.62rem;
+  }
+
+  .card-number,
+  .rarity-badge {
+    padding: 4px 7px;
+    font-size: 0.62rem;
+  }
+}
