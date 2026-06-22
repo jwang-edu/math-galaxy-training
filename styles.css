@@ -3447,3 +3447,104 @@ canvas {
     text-align: center;
   }
 }
+
+
+/* Per-operation select all control */
+.category-select-all {
+  position: relative;
+  flex: 0 0 auto;
+  min-height: 34px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.category-select-all > input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.category-select-all > span {
+  min-height: 34px;
+  padding: 5px 10px 5px 7px;
+  border: 1px solid color-mix(in srgb, var(--operation-color) 42%, transparent);
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: var(--text-secondary);
+  background: rgba(2, 6, 23, 0.52);
+  font-size: 0.74rem;
+  font-weight: 900;
+  line-height: 1;
+  transition: border-color 0.18s ease, color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+
+.category-select-all i {
+  width: 21px;
+  height: 21px;
+  border: 1px solid color-mix(in srgb, var(--operation-color) 58%, transparent);
+  border-radius: 7px;
+  display: grid;
+  place-items: center;
+  color: transparent;
+  background: rgba(255, 255, 255, 0.04);
+  font-size: 0.72rem;
+  font-style: normal;
+}
+
+.category-select-all b {
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.category-select-all > input:checked + span,
+.category-select-all > input:indeterminate + span {
+  border-color: var(--operation-color);
+  color: var(--operation-color);
+  background: var(--operation-glow);
+  box-shadow: 0 0 16px var(--operation-glow);
+}
+
+.category-select-all > input:checked + span i {
+  color: #071229;
+  background: var(--operation-color);
+  box-shadow: 0 0 12px var(--operation-color);
+}
+
+.category-select-all > input:indeterminate + span i {
+  color: var(--operation-color);
+}
+
+.category-select-all > input:indeterminate + span i::before {
+  content: "−";
+  font-size: 0.9rem;
+}
+
+.category-select-all > input:indeterminate + span i {
+  font-size: 0;
+}
+
+.category-select-all > input:focus-visible + span {
+  outline: 3px solid color-mix(in srgb, var(--operation-color) 34%, transparent);
+  outline-offset: 2px;
+}
+
+@media (max-width: 620px) {
+  .category-select-all > span {
+    padding-right: 8px;
+  }
+}
+
+@media (max-width: 460px) {
+  .category-group-title > small {
+    display: none;
+  }
+
+  .category-select-all {
+    margin-left: auto;
+  }
+}

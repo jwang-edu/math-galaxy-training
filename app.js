@@ -597,6 +597,7 @@ const els = {
   clearRecordsButton: document.querySelector("#clearRecordsButton"),
 };
 
+safeListen(els.categoryOptions, "change", handleCategorySelectionChange);
 safeListen(els.startButton, "click", startPractice);
 safeListen(els.restartButton, "click", startPractice);
 safeListen(els.backButton, "click", returnToSetup);
@@ -837,6 +838,10 @@ function renderCategoryOptions() {
             <span>${operationSymbol}</span>
             <strong>${operationName}</strong>
             <small>${operationCategories.length} 个难度</small>
+            <label class="category-select-all">
+              <input type="checkbox" data-operation-toggle="${operation}" checked>
+              <span><i aria-hidden="true">✓</i><b>取消全选</b></span>
+            </label>
           </div>
           <div class="category-group-options">
             ${operationCategories.map((category) => `
@@ -854,6 +859,32 @@ function renderCategoryOptions() {
       `;
     })
     .join("");
+}
+
+function handleCategorySelectionChange(event) {
+  const target = event.target;
+  const group = target.closest(".category-group");
+  if (!group) return;
+
+  if (target.matches("[data-operation-toggle]")) {
+    group.querySelectorAll('input[name="categoryType"]').forEach((input) => {
+      input.checked = target.checked;
+    });
+  }
+
+  syncCategoryGroupToggle(group);
+}
+
+function syncCategoryGroupToggle(group) {
+  const toggle = group.querySelector("[data-operation-toggle]");
+  const categoryInputs = [...group.querySelectorAll('input[name="categoryType"]')];
+  if (!toggle || categoryInputs.length === 0) return;
+
+  const selectedCount = categoryInputs.filter((input) => input.checked).length;
+  toggle.checked = selectedCount === categoryInputs.length;
+  toggle.indeterminate = selectedCount > 0 && selectedCount < categoryInputs.length;
+  const label = toggle.nextElementSibling?.querySelector("b");
+  if (label) label.textContent = toggle.checked ? "取消全选" : "全选";
 }
 
 function getSelectedCategories() {
