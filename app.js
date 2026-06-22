@@ -281,42 +281,85 @@ const solarScienceCards = [
   sciencePower: card.domains.gravity + card.domains.orbit + card.domains.matter + card.domains.energy + card.domains.mystery + rarityBonus[card.rarity],
 }));
 
+function makeTwoDigitAddition(withCarry) {
+  const tensA = randomInt(1, withCarry ? 9 : 8);
+  const tensB = withCarry ? randomInt(1, 9) : randomInt(1, 9 - tensA);
+  const onesA = withCarry ? randomInt(1, 9) : randomInt(0, 8);
+  const onesB = withCarry ? randomInt(10 - onesA, 9) : randomInt(0, 9 - onesA);
+  const a = tensA * 10 + onesA;
+  const b = tensB * 10 + onesB;
+  return { text: `${a} + ${b}`, answer: a + b };
+}
+
+function makeTwoDigitMinusOneDigit(withBorrow) {
+  const tens = randomInt(1, 9);
+  const ones = withBorrow ? randomInt(0, 8) : randomInt(1, 9);
+  const subtrahend = withBorrow ? randomInt(ones + 1, 9) : randomInt(1, ones);
+  const minuend = tens * 10 + ones;
+  return { text: `${minuend} - ${subtrahend}`, answer: minuend - subtrahend };
+}
+
+function makeTwoDigitSubtraction(withBorrow) {
+  const minuendTens = withBorrow ? randomInt(2, 9) : randomInt(1, 9);
+  const minuendOnes = withBorrow ? randomInt(0, 8) : randomInt(0, 9);
+  const subtrahendTens = withBorrow ? randomInt(1, minuendTens - 1) : randomInt(1, minuendTens);
+  const subtrahendOnes = withBorrow ? randomInt(minuendOnes + 1, 9) : randomInt(0, minuendOnes);
+  const minuend = minuendTens * 10 + minuendOnes;
+  const subtrahend = subtrahendTens * 10 + subtrahendOnes;
+  return { text: `${minuend} - ${subtrahend}`, answer: minuend - subtrahend };
+}
+
+function makeExactDivision(dividendDigits, divisorDigits) {
+  const dividendMin = 10 ** (dividendDigits - 1);
+  const dividendMax = 10 ** dividendDigits - 1;
+  const divisorMin = divisorDigits === 1 ? 2 : 10 ** (divisorDigits - 1);
+  const divisorMax = divisorDigits === 1 ? 9 : 10 ** divisorDigits - 1;
+
+  for (let attempt = 0; attempt < 100; attempt += 1) {
+    const divisor = randomInt(divisorMin, divisorMax);
+    const quotientMin = Math.max(1, Math.ceil(dividendMin / divisor));
+    const quotientMax = Math.floor(dividendMax / divisor);
+    if (quotientMin > quotientMax) continue;
+    const quotient = randomInt(quotientMin, quotientMax);
+    const dividend = divisor * quotient;
+    return { text: `${dividend} ÷ ${divisor}`, answer: quotient };
+  }
+
+  return { text: "100 ÷ 10", answer: 10 };
+}
+
 const categories = [
   {
-    id: "singleAddSub",
-    name: "个位数加减法",
-    reward: 1,
-    difficulty: "Lv.1 入门轨道",
+    id: "add1NoCarry", operation: "addition", operationName: "加法", operationSymbol: "+",
+    name: "个位数不进位加法", reward: 1, difficulty: "加法 Lv.1 · 入门",
     make() {
-      const isAddition = Math.random() < 0.5;
-      const a = randomInt(1, 9);
-      const b = randomInt(1, 9);
-
-      if (isAddition) {
-        return { text: `${a} + ${b}`, answer: a + b };
-      }
-
-      const larger = Math.max(a, b);
-      const smaller = Math.min(a, b);
-      return { text: `${larger} - ${smaller}`, answer: larger - smaller };
-    },
-  },
-  {
-    id: "add2",
-    name: "2 位数加法",
-    reward: 1,
-    difficulty: "Lv.2 月面基地",
-    make() {
-      const a = randomInt(10, 99);
-      const b = randomInt(10, 99);
+      const a = randomInt(1, 8);
+      const b = randomInt(1, 9 - a);
       return { text: `${a} + ${b}`, answer: a + b };
     },
   },
   {
-    id: "add3",
-    name: "3 位数加法",
-    reward: 2,
-    difficulty: "Lv.3 星云航线",
+    id: "add1Carry", operation: "addition", operationName: "加法", operationSymbol: "+",
+    name: "个位数进位加法", reward: 1, difficulty: "加法 Lv.2 · 基础",
+    make() {
+      const a = randomInt(1, 9);
+      const b = randomInt(10 - a, 9);
+      return { text: `${a} + ${b}`, answer: a + b };
+    },
+  },
+  {
+    id: "add2NoCarry", operation: "addition", operationName: "加法", operationSymbol: "+",
+    name: "两位数不进位加法", reward: 2, difficulty: "加法 Lv.3 · 稳固",
+    make: () => makeTwoDigitAddition(false),
+  },
+  {
+    id: "add2Carry", operation: "addition", operationName: "加法", operationSymbol: "+",
+    name: "两位数进位加法", reward: 2, difficulty: "加法 Lv.4 · 进阶",
+    make: () => makeTwoDigitAddition(true),
+  },
+  {
+    id: "add3", operation: "addition", operationName: "加法", operationSymbol: "+",
+    name: "三位数加法", reward: 3, difficulty: "加法 Lv.5 · 挑战",
     make() {
       const a = randomInt(100, 999);
       const b = randomInt(100, 999);
@@ -324,10 +367,8 @@ const categories = [
     },
   },
   {
-    id: "add4",
-    name: "4 位数加法",
-    reward: 3,
-    difficulty: "Lv.4 深空跃迁",
+    id: "add4", operation: "addition", operationName: "加法", operationSymbol: "+",
+    name: "四位数加法", reward: 4, difficulty: "加法 Lv.6 · 深空",
     make() {
       const a = randomInt(1000, 9999);
       const b = randomInt(1000, 9999);
@@ -335,26 +376,98 @@ const categories = [
     },
   },
   {
-    id: "mul2x1",
-    name: "两位数乘个位数",
-    reward: 4,
-    difficulty: "Lv.5 引擎加速",
+    id: "sub1", operation: "subtraction", operationName: "减法", operationSymbol: "−",
+    name: "个位数减法", reward: 1, difficulty: "减法 Lv.1 · 入门",
     make() {
-      const a = randomInt(10, 99);
-      const b = randomInt(2, 9);
+      const a = randomInt(1, 9);
+      const b = randomInt(0, a);
+      return { text: `${a} - ${b}`, answer: a - b };
+    },
+  },
+  {
+    id: "sub2x1NoBorrow", operation: "subtraction", operationName: "减法", operationSymbol: "−",
+    name: "两位数减个位数（不退位）", reward: 2, difficulty: "减法 Lv.2 · 基础",
+    make: () => makeTwoDigitMinusOneDigit(false),
+  },
+  {
+    id: "sub2x1Borrow", operation: "subtraction", operationName: "减法", operationSymbol: "−",
+    name: "两位数减个位数（退位）", reward: 2, difficulty: "减法 Lv.3 · 退位",
+    make: () => makeTwoDigitMinusOneDigit(true),
+  },
+  {
+    id: "sub2NoBorrow", operation: "subtraction", operationName: "减法", operationSymbol: "−",
+    name: "两位数减两位数（不退位）", reward: 3, difficulty: "减法 Lv.4 · 稳固",
+    make: () => makeTwoDigitSubtraction(false),
+  },
+  {
+    id: "sub2Borrow", operation: "subtraction", operationName: "减法", operationSymbol: "−",
+    name: "两位数减两位数（退位）", reward: 3, difficulty: "减法 Lv.5 · 进阶",
+    make: () => makeTwoDigitSubtraction(true),
+  },
+  {
+    id: "sub3", operation: "subtraction", operationName: "减法", operationSymbol: "−",
+    name: "三位数减三位数", reward: 4, difficulty: "减法 Lv.6 · 挑战",
+    make() {
+      const a = randomInt(100, 999);
+      const b = randomInt(100, a);
+      return { text: `${a} - ${b}`, answer: a - b };
+    },
+  },
+  {
+    id: "sub4", operation: "subtraction", operationName: "减法", operationSymbol: "−",
+    name: "四位数减四位数", reward: 5, difficulty: "减法 Lv.7 · 深空",
+    make() {
+      const a = randomInt(1000, 9999);
+      const b = randomInt(1000, a);
+      return { text: `${a} - ${b}`, answer: a - b };
+    },
+  },
+  {
+    id: "mul1x1", operation: "multiplication", operationName: "乘法", operationSymbol: "×",
+    name: "个位数乘法", reward: 1, difficulty: "乘法 Lv.1 · 口诀",
+    make() {
+      const a = randomInt(1, 9);
+      const b = randomInt(1, 9);
       return { text: `${a} × ${b}`, answer: a * b };
     },
   },
   {
-    id: "mul2x2",
-    name: "两位数乘两位数",
-    reward: 5,
-    difficulty: "Lv.6 银河挑战",
+    id: "mul1x2", operation: "multiplication", operationName: "乘法", operationSymbol: "×",
+    name: "个位数和两位数相乘", reward: 3, difficulty: "乘法 Lv.2 · 进阶",
+    make() {
+      const a = randomInt(2, 9);
+      const b = randomInt(10, 99);
+      return { text: `${a} × ${b}`, answer: a * b };
+    },
+  },
+  {
+    id: "mul2x2", operation: "multiplication", operationName: "乘法", operationSymbol: "×",
+    name: "两位数相乘", reward: 5, difficulty: "乘法 Lv.3 · 挑战",
     make() {
       const a = randomInt(10, 99);
       const b = randomInt(10, 99);
       return { text: `${a} × ${b}`, answer: a * b };
     },
+  },
+  {
+    id: "div1x1", operation: "division", operationName: "除法", operationSymbol: "÷",
+    name: "个位数除法", reward: 2, difficulty: "除法 Lv.1 · 入门",
+    make: () => makeExactDivision(1, 1),
+  },
+  {
+    id: "div2x1", operation: "division", operationName: "除法", operationSymbol: "÷",
+    name: "两位数除以个位数", reward: 3, difficulty: "除法 Lv.2 · 基础",
+    make: () => makeExactDivision(2, 1),
+  },
+  {
+    id: "div3x1", operation: "division", operationName: "除法", operationSymbol: "÷",
+    name: "三位数除以个位数", reward: 4, difficulty: "除法 Lv.3 · 进阶",
+    make: () => makeExactDivision(3, 1),
+  },
+  {
+    id: "div3x2", operation: "division", operationName: "除法", operationSymbol: "÷",
+    name: "三位数除以两位数", reward: 6, difficulty: "除法 Lv.4 · 挑战",
+    make: () => makeExactDivision(3, 2),
   },
 ];
 
@@ -713,17 +826,31 @@ function startPractice() {
 }
 
 function renderCategoryOptions() {
-  els.categoryOptions.innerHTML = categories
-    .map((category) => {
+  const operationOrder = ["addition", "subtraction", "multiplication", "division"];
+  els.categoryOptions.innerHTML = operationOrder
+    .map((operation) => {
+      const operationCategories = categories.filter((category) => category.operation === operation);
+      const { operationName, operationSymbol } = operationCategories[0];
       return `
-        <label>
-          <input type="checkbox" name="categoryType" value="${category.id}" checked>
-          <span>
-            <strong>${category.name}</strong>
-            <small>基础 +${category.reward} 星</small>
-            <em>${category.difficulty}</em>
-          </span>
-        </label>
+        <section class="category-group category-group-${operation}">
+          <div class="category-group-title">
+            <span>${operationSymbol}</span>
+            <strong>${operationName}</strong>
+            <small>${operationCategories.length} 个难度</small>
+          </div>
+          <div class="category-group-options">
+            ${operationCategories.map((category) => `
+              <label>
+                <input type="checkbox" name="categoryType" value="${category.id}" checked>
+                <span>
+                  <strong>${category.name}</strong>
+                  <small>基础 +${category.reward} 星</small>
+                  <em>${category.difficulty}</em>
+                </span>
+              </label>
+            `).join("")}
+          </div>
+        </section>
       `;
     })
     .join("");
