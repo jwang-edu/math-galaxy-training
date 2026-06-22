@@ -5,12 +5,12 @@ const GROWTH_STORAGE_KEY = "mathGalaxyGrowth";
 const WEEKLY_GOAL = 1200;
 
 const levels = [
-  { name: "星星学徒", min: 0, next: 300 },
-  { name: "计算探索者", min: 300, next: 800 },
-  { name: "星轨训练员", min: 800, next: 1500 },
-  { name: "数学飞行员", min: 1500, next: 3000 },
-  { name: "银河计算师", min: 3000, next: 6000 },
-  { name: "宇宙数学家", min: 6000, next: Infinity },
+  { level: 1, name: "星星学徒", min: 0, next: 300 },
+  { level: 2, name: "计算探索者", min: 300, next: 800 },
+  { level: 3, name: "星轨训练员", min: 800, next: 1500 },
+  { level: 4, name: "数学飞行员", min: 1500, next: 3000 },
+  { level: 5, name: "银河计算师", min: 3000, next: 6000 },
+  { level: 6, name: "宇宙数学家", min: 6000, next: Infinity },
 ];
 
 
@@ -1293,7 +1293,7 @@ function getLevelInfo(totalStars) {
 
   if (current.next === Infinity) {
     return {
-      name: current.name,
+      name: `Level ${current.level} · ${current.name}`,
       progress: 100,
       nextText: "已进入最高星域",
     };
@@ -1303,7 +1303,7 @@ function getLevelInfo(totalStars) {
   const earnedInLevel = totalStars - current.min;
   const progress = Math.max(0, Math.min(100, Math.round((earnedInLevel / span) * 100)));
   return {
-    name: current.name,
+    name: `Level ${current.level} · ${current.name}`,
     progress,
     nextText: `距离下一等级还差 ${current.next - totalStars} 星`,
   };
