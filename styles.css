@@ -1610,16 +1610,64 @@ h2 {
 .solar-realm-map {
   min-height: 300px;
   margin-top: 16px;
-  padding: 28px 18px;
-  border-radius: 18px;
   display: grid;
-  grid-template-columns: repeat(15, minmax(78px, 1fr));
-  gap: 10px;
+  gap: 18px;
+}
+
+.realm-map-group {
+  padding: 22px 18px 28px;
+  border: 1px solid rgba(100, 191, 255, 0.16);
+  border-radius: 18px;
   background:
-    linear-gradient(90deg, transparent 0 4%, rgba(55, 197, 255, 0.20) 5%, transparent 6% 100%),
-    radial-gradient(circle at 10% 50%, rgba(255, 211, 90, 0.18), transparent 18%),
+    linear-gradient(90deg, transparent 0 4%, rgba(55, 197, 255, 0.16) 5%, transparent 6% 100%),
+    radial-gradient(circle at 10% 50%, rgba(255, 211, 90, 0.16), transparent 18%),
     rgba(2, 6, 23, 0.36);
   overflow-x: auto;
+}
+
+.realm-map-group-zodiac_realm {
+  background:
+    linear-gradient(90deg, transparent 0 4%, rgba(155, 109, 255, 0.18) 5%, transparent 6% 100%),
+    radial-gradient(circle at 14% 38%, rgba(155, 109, 255, 0.18), transparent 22%),
+    radial-gradient(circle at 92% 62%, rgba(255, 211, 90, 0.12), transparent 20%),
+    rgba(2, 6, 23, 0.38);
+}
+
+.realm-map-heading {
+  min-width: max-content;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.realm-map-heading h3 {
+  margin: 0;
+  color: #fff;
+  font-size: 1.08rem;
+}
+
+.realm-map-heading strong {
+  padding: 7px 12px;
+  border: 1px solid rgba(255, 211, 90, 0.28);
+  border-radius: 999px;
+  color: var(--gold);
+  background: rgba(255, 211, 90, 0.08);
+}
+
+.realm-node-track {
+  display: grid;
+  grid-template-columns: repeat(var(--realm-node-count, 15), minmax(78px, 1fr));
+  gap: 10px;
+}
+
+.realm-map-group-solar_realm .realm-node-track {
+  --realm-node-count: 15;
+}
+
+.realm-map-group-zodiac_realm .realm-node-track {
+  --realm-node-count: 12;
 }
 
 .solar-node {
@@ -2215,7 +2263,7 @@ button.solar-science-card {
 }
 
 .stellar-pack-panel::after {
-  content: "🛰️ Solar Science Discovery Pack";
+  content: "🛰️ Stellar Science Discovery Pack";
   border: 1px solid rgba(255, 209, 102, 0.26);
   border-radius: 18px;
   padding: 14px 16px;

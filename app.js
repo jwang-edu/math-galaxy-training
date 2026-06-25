@@ -281,6 +281,222 @@ const solarScienceCards = [
   sciencePower: card.domains.gravity + card.domains.orbit + card.domains.matter + card.domains.energy + card.domains.mystery + rarityBonus[card.rarity],
 }));
 
+const zodiacScienceCards = [
+  {
+    id: "zodiac_aries",
+    cardNo: "ZC-001",
+    realmId: "zodiac_realm",
+    name: "Aries",
+    nameZh: "白羊座",
+    category: "黄道星座",
+    rarity: "Rare",
+    image: "/cards/zodiac/zodiac-01-aries.png",
+    fallbackIcon: "♈",
+    scienceIntro: "白羊座是黄道上的星座之一，面积不大，但它位于太阳在天空中运行路径附近。它提醒我们，星座是人类给天空划分区域的一种方式。",
+    keyIdeas: ["黄道星座", "春季夜空", "天空分区", "古老星图"],
+    domains: { gravity: 42, orbit: 82, matter: 66, energy: 72, mystery: 76 },
+    lightNodeId: "node-aries",
+  },
+  {
+    id: "zodiac_taurus",
+    cardNo: "ZC-002",
+    realmId: "zodiac_realm",
+    name: "Taurus",
+    nameZh: "金牛座",
+    category: "恒星群落",
+    rarity: "Epic",
+    image: "/cards/zodiac/zodiac-02-taurus.png",
+    fallbackIcon: "♉",
+    scienceIntro: "金牛座中有著名的昴星团和毕星团，是观察恒星群落的好地方。它让孩子看到，夜空中的星星并不是均匀散布的，有些会形成漂亮的星团。",
+    keyIdeas: ["昴星团", "毕星团", "恒星群落", "冬季星空"],
+    domains: { gravity: 58, orbit: 74, matter: 86, energy: 82, mystery: 69 },
+    lightNodeId: "node-taurus",
+  },
+  {
+    id: "zodiac_gemini",
+    cardNo: "ZC-003",
+    realmId: "zodiac_realm",
+    name: "Gemini",
+    nameZh: "双子座",
+    category: "双星神话星座",
+    rarity: "Epic",
+    image: "/cards/zodiac/zodiac-03-gemini.png",
+    fallbackIcon: "♊",
+    scienceIntro: "双子座中有两颗很有名的亮星：北河二和北河三。它们让这个星座很容易被辨认，也帮助我们理解人类如何用亮星连接出星座图形。",
+    keyIdeas: ["北河二", "北河三", "亮星识别", "冬季星座"],
+    domains: { gravity: 54, orbit: 78, matter: 76, energy: 86, mystery: 68 },
+    lightNodeId: "node-gemini",
+  },
+  {
+    id: "zodiac_cancer",
+    cardNo: "ZC-004",
+    realmId: "zodiac_realm",
+    name: "Cancer",
+    nameZh: "巨蟹座",
+    category: "暗淡黄道星座",
+    rarity: "Common",
+    image: "/cards/zodiac/zodiac-04-cancer.png",
+    fallbackIcon: "♋",
+    scienceIntro: "巨蟹座整体比较暗淡，不像狮子座或天蝎座那样容易发现。但它包含蜂巢星团，是一个适合学习“暗星座中也藏着惊喜”的科学卡片。",
+    keyIdeas: ["蜂巢星团", "暗淡星座", "黄道区域", "望远镜观察"],
+    domains: { gravity: 38, orbit: 70, matter: 74, energy: 56, mystery: 68 },
+    lightNodeId: "node-cancer",
+  },
+  {
+    id: "zodiac_leo",
+    cardNo: "ZC-005",
+    realmId: "zodiac_realm",
+    name: "Leo",
+    nameZh: "狮子座",
+    category: "明亮黄道星座",
+    rarity: "Epic",
+    image: "/cards/zodiac/zodiac-05-leo.png",
+    fallbackIcon: "♌",
+    scienceIntro: "狮子座是春季夜空中很容易辨认的星座之一。它的亮星轩辕十四位于黄道附近，常被用来帮助寻找天空中的方向和星座结构。",
+    keyIdeas: ["轩辕十四", "春季星空", "亮星导航", "黄道星座"],
+    domains: { gravity: 60, orbit: 82, matter: 78, energy: 90, mystery: 72 },
+    lightNodeId: "node-leo",
+  },
+  {
+    id: "zodiac_virgo",
+    cardNo: "ZC-006",
+    realmId: "zodiac_realm",
+    name: "Virgo",
+    nameZh: "处女座",
+    category: "巨型黄道星座",
+    rarity: "Legendary",
+    image: "/cards/zodiac/zodiac-06-virgo.png",
+    fallbackIcon: "♍",
+    scienceIntro: "处女座是天空中面积很大的星座之一，其中的角宿一是一颗明亮的蓝白色恒星。处女座方向还包含许多遥远星系，是理解深空宇宙的重要区域。",
+    keyIdeas: ["角宿一", "大型星座", "遥远星系", "深空观测"],
+    domains: { gravity: 72, orbit: 80, matter: 82, energy: 88, mystery: 66 },
+    lightNodeId: "node-virgo",
+  },
+  {
+    id: "zodiac_libra",
+    cardNo: "ZC-007",
+    realmId: "zodiac_realm",
+    name: "Libra",
+    nameZh: "天秤座",
+    category: "黄道平衡星座",
+    rarity: "Rare",
+    image: "/cards/zodiac/zodiac-07-libra.png",
+    fallbackIcon: "♎",
+    scienceIntro: "天秤座位于黄道附近，介于处女座和天蝎座之间。它的亮星不像其他星座那么突出，却能帮助我们理解星座之间的空间关系。",
+    keyIdeas: ["黄道星座", "星座边界", "天空坐标", "星图定位"],
+    domains: { gravity: 44, orbit: 76, matter: 64, energy: 62, mystery: 76 },
+    lightNodeId: "node-libra",
+  },
+  {
+    id: "zodiac_scorpius",
+    cardNo: "ZC-008",
+    realmId: "zodiac_realm",
+    name: "Scorpius",
+    nameZh: "天蝎座",
+    category: "红超巨星座",
+    rarity: "Legendary",
+    image: "/cards/zodiac/zodiac-08-scorpius.png",
+    fallbackIcon: "♏",
+    scienceIntro: "天蝎座拥有明亮的心宿二，它是一颗红超巨星。这个星座靠近银河明亮区域，适合引导孩子认识恒星颜色、恒星大小和银河结构。",
+    keyIdeas: ["心宿二", "红超巨星", "银河区域", "夏季星空"],
+    domains: { gravity: 76, orbit: 78, matter: 88, energy: 96, mystery: 62 },
+    lightNodeId: "node-scorpius",
+  },
+  {
+    id: "zodiac_sagittarius",
+    cardNo: "ZC-009",
+    realmId: "zodiac_realm",
+    name: "Sagittarius",
+    nameZh: "射手座",
+    category: "银河中心星座",
+    rarity: "Legendary",
+    image: "/cards/zodiac/zodiac-09-sagittarius.png",
+    fallbackIcon: "♐",
+    scienceIntro: "射手座方向靠近银河系中心。那里有大量恒星、星云和尘埃，也是理解银河系结构的重要天空区域。",
+    keyIdeas: ["银河中心", "星云区域", "恒星密集", "深空探索"],
+    domains: { gravity: 82, orbit: 84, matter: 90, energy: 92, mystery: 81 },
+    lightNodeId: "node-sagittarius",
+  },
+  {
+    id: "zodiac_capricornus",
+    cardNo: "ZC-010",
+    realmId: "zodiac_realm",
+    name: "Capricornus",
+    nameZh: "摩羯座",
+    category: "古老黄道星座",
+    rarity: "Common",
+    image: "/cards/zodiac/zodiac-10-capricornus.png",
+    fallbackIcon: "♑",
+    scienceIntro: "摩羯座是黄道星座之一，整体较暗，需要较好的夜空环境才能观察。它适合帮助孩子理解：并不是所有星座都由明亮恒星组成。",
+    keyIdeas: ["暗淡星座", "黄道区域", "秋季星空", "古老星图"],
+    domains: { gravity: 40, orbit: 72, matter: 62, energy: 58, mystery: 82 },
+    lightNodeId: "node-capricornus",
+  },
+  {
+    id: "zodiac_aquarius",
+    cardNo: "ZC-011",
+    realmId: "zodiac_realm",
+    name: "Aquarius",
+    nameZh: "水瓶座",
+    category: "深空区域星座",
+    rarity: "Rare",
+    image: "/cards/zodiac/zodiac-11-aquarius.png",
+    fallbackIcon: "♒",
+    scienceIntro: "水瓶座覆盖的天空区域较大，虽然亮星不多，但包含一些有趣的深空目标。它适合引导孩子理解，暗淡星区也可能藏着丰富的宇宙结构。",
+    keyIdeas: ["深空天体", "大面积星座", "黄道区域", "秋季夜空"],
+    domains: { gravity: 48, orbit: 78, matter: 70, energy: 64, mystery: 87 },
+    lightNodeId: "node-aquarius",
+  },
+  {
+    id: "zodiac_pisces",
+    cardNo: "ZC-012",
+    realmId: "zodiac_realm",
+    name: "Pisces",
+    nameZh: "双鱼座",
+    category: "双鱼星链星座",
+    rarity: "Rare",
+    image: "/cards/zodiac/zodiac-12-pisces.png",
+    fallbackIcon: "♓",
+    scienceIntro: "双鱼座由两条延展的星链组成，位于黄道附近。它不算特别明亮，但形状很有辨识感，适合学习如何在星图中寻找星座连接线。",
+    keyIdeas: ["星链结构", "黄道星座", "秋季星空", "星图识别"],
+    domains: { gravity: 46, orbit: 80, matter: 66, energy: 60, mystery: 81 },
+    lightNodeId: "node-pisces",
+  },
+].map((card) => ({
+  ...card,
+  sciencePower: card.domains.gravity + card.domains.orbit + card.domains.matter + card.domains.energy + card.domains.mystery + rarityBonus[card.rarity],
+}));
+
+const scienceRealms = [
+  { id: "solar_realm", labelEn: "Solar Realm", labelZh: "太阳星域", collectionName: "Solar Realm Collection", cards: solarScienceCards },
+  { id: "zodiac_realm", labelEn: "Zodiac Realm", labelZh: "黄道星域", collectionName: "Zodiac Realm Collection", cards: zodiacScienceCards },
+];
+
+const allScienceCards = scienceRealms.flatMap((realm) => realm.cards);
+
+function getRealmDefinition(realmId) {
+  return scienceRealms.find((realm) => realm.id === realmId) ?? scienceRealms[0];
+}
+
+function getCardsForRealm(realmId) {
+  return getRealmDefinition(realmId).cards;
+}
+
+function getRealmLabel(realmId) {
+  const realm = getRealmDefinition(realmId);
+  return `${realm.labelEn} ${realm.labelZh}`;
+}
+
+function getTotalRealmProgress(user) {
+  const totals = scienceRealms.reduce((sum, realm) => {
+    const progress = user.realmProgress?.[realm.id];
+    sum.unlockedCards += progress?.unlockedCards ?? 0;
+    sum.totalCards += realm.cards.length;
+    return sum;
+  }, { unlockedCards: 0, totalCards: 0 });
+  return { ...totals, completed: totals.totalCards > 0 && totals.unlockedCards >= totals.totalCards };
+}
+
 function makeTwoDigitAddition(withCarry) {
   const tensA = randomInt(1, withCarry ? 9 : 8);
   const tensB = withCarry ? randomInt(1, 9) : randomInt(1, 9 - tensA);
@@ -326,6 +542,13 @@ function makeExactDivision(dividendDigits, divisorDigits) {
   }
 
   return { text: "100 ÷ 10", answer: 10 };
+}
+
+function makeTwoDigitMultiplicationWithin(maxValue) {
+  const upper = Math.min(99, maxValue);
+  const a = randomInt(10, upper);
+  const b = randomInt(10, upper);
+  return { text: `${a} × ${b}`, answer: a * b };
 }
 
 const categories = [
@@ -441,13 +664,49 @@ const categories = [
     },
   },
   {
-    id: "mul2x2", operation: "multiplication", operationName: "乘法", operationSymbol: "×",
-    name: "两位数相乘", reward: 5, difficulty: "乘法 Lv.3 · 挑战",
-    make() {
-      const a = randomInt(10, 99);
-      const b = randomInt(10, 99);
-      return { text: `${a} × ${b}`, answer: a * b };
-    },
+    id: "mul2x2Within20", operation: "multiplication", operationName: "乘法", operationSymbol: "×",
+    name: "20以内两位数相乘", reward: 4, difficulty: "乘法 Lv.3 · 起航",
+    make: () => makeTwoDigitMultiplicationWithin(20),
+  },
+  {
+    id: "mul2x2Within30", operation: "multiplication", operationName: "乘法", operationSymbol: "×",
+    name: "30以内两位数相乘", reward: 4, difficulty: "乘法 Lv.4 · 稳固",
+    make: () => makeTwoDigitMultiplicationWithin(30),
+  },
+  {
+    id: "mul2x2Within40", operation: "multiplication", operationName: "乘法", operationSymbol: "×",
+    name: "40以内两位数相乘", reward: 5, difficulty: "乘法 Lv.5 · 进阶",
+    make: () => makeTwoDigitMultiplicationWithin(40),
+  },
+  {
+    id: "mul2x2Within50", operation: "multiplication", operationName: "乘法", operationSymbol: "×",
+    name: "50以内两位数相乘", reward: 5, difficulty: "乘法 Lv.6 · 推进",
+    make: () => makeTwoDigitMultiplicationWithin(50),
+  },
+  {
+    id: "mul2x2Within60", operation: "multiplication", operationName: "乘法", operationSymbol: "×",
+    name: "60以内两位数相乘", reward: 6, difficulty: "乘法 Lv.7 · 挑战",
+    make: () => makeTwoDigitMultiplicationWithin(60),
+  },
+  {
+    id: "mul2x2Within70", operation: "multiplication", operationName: "乘法", operationSymbol: "×",
+    name: "70以内两位数相乘", reward: 6, difficulty: "乘法 Lv.8 · 强化",
+    make: () => makeTwoDigitMultiplicationWithin(70),
+  },
+  {
+    id: "mul2x2Within80", operation: "multiplication", operationName: "乘法", operationSymbol: "×",
+    name: "80以内两位数相乘", reward: 7, difficulty: "乘法 Lv.9 · 高阶",
+    make: () => makeTwoDigitMultiplicationWithin(80),
+  },
+  {
+    id: "mul2x2Within90", operation: "multiplication", operationName: "乘法", operationSymbol: "×",
+    name: "90以内两位数相乘", reward: 7, difficulty: "乘法 Lv.10 · 深空",
+    make: () => makeTwoDigitMultiplicationWithin(90),
+  },
+  {
+    id: "mul2x2Within100", operation: "multiplication", operationName: "乘法", operationSymbol: "×",
+    name: "100以内两位数相乘", reward: 8, difficulty: "乘法 Lv.11 · 银河",
+    make: () => makeTwoDigitMultiplicationWithin(99),
   },
   {
     id: "div1x1", operation: "division", operationName: "除法", operationSymbol: "÷",
@@ -1398,24 +1657,28 @@ function createDefaultJourney() {
 }
 
 function createDefaultRealmProgress() {
-  return {
-    solar_realm: {
-      totalCards: solarScienceCards.length,
+  return Object.fromEntries(scienceRealms.map((realm) => [
+    realm.id,
+    {
+      totalCards: realm.cards.length,
       unlockedCards: 0,
       completed: false,
       completedAt: null,
     },
-  };
+  ]));
 }
 
 function initializeJourneyData(user) {
   user.journey = { ...createDefaultJourney(), ...(user.journey ?? {}) };
   user.cardCollection = user.cardCollection ?? {};
-  user.realmProgress = { ...createDefaultRealmProgress(), ...(user.realmProgress ?? {}) };
-  user.realmProgress.solar_realm = {
-    ...createDefaultRealmProgress().solar_realm,
-    ...(user.realmProgress.solar_realm ?? {}),
-  };
+  const defaultProgress = createDefaultRealmProgress();
+  user.realmProgress = { ...defaultProgress, ...(user.realmProgress ?? {}) };
+  scienceRealms.forEach((realm) => {
+    user.realmProgress[realm.id] = {
+      ...defaultProgress[realm.id],
+      ...(user.realmProgress[realm.id] ?? {}),
+    };
+  });
   const todayKey = getDateKey();
   if (user.journey.lastJourneyDate !== todayKey) {
     user.journey.starsEarnedToday = 0;
@@ -1426,14 +1689,16 @@ function initializeJourneyData(user) {
 }
 
 function refreshRealmProgress(user) {
-  const unlockedCards = solarScienceCards.filter((card) => user.cardCollection?.[card.id]?.owned).length;
-  const progress = user.realmProgress.solar_realm;
-  progress.totalCards = solarScienceCards.length;
-  progress.unlockedCards = unlockedCards;
-  if (unlockedCards >= solarScienceCards.length && !progress.completed) {
-    progress.completed = true;
-    progress.completedAt = new Date().toISOString();
-  }
+  scienceRealms.forEach((realm) => {
+    const unlockedCards = realm.cards.filter((card) => user.cardCollection?.[card.id]?.owned).length;
+    const progress = user.realmProgress[realm.id];
+    progress.totalCards = realm.cards.length;
+    progress.unlockedCards = unlockedCards;
+    if (unlockedCards >= realm.cards.length && !progress.completed) {
+      progress.completed = true;
+      progress.completedAt = new Date().toISOString();
+    }
+  });
 }
 
 function updateJourneyProgress(user, starsEarned, isFirstPracticeToday) {
@@ -1481,16 +1746,16 @@ function renderJourneyScreen() {
   const user = getCurrentUser();
   if (!user) return;
   initializeJourneyData(user);
-  const progress = user.realmProgress.solar_realm;
+  const progress = getTotalRealmProgress(user);
   els.journeyPilotAvatar.textContent = user.avatar;
   els.journeyPilotName.textContent = `${user.name}的星际之旅`;
   els.journeyTotalStars.textContent = user.totalStars;
   els.journeyStarDust.textContent = user.starDust;
   els.journeyDrawChances.textContent = user.journey.dailyDrawChances;
   els.journeyDrawProgress.textContent = `${user.journey.starsTowardNextDraw} / 100`;
-  els.journeyProgressText.textContent = `太阳星域 ${progress.unlockedCards} / ${progress.totalCards}`;
+  els.journeyProgressText.textContent = `星域点亮 ${progress.unlockedCards} / ${progress.totalCards}`;
   els.solarProgressBadge.textContent = progress.completed
-    ? "太阳星域科学图鉴完成"
+    ? "全部科学图鉴完成"
     : `${progress.unlockedCards} / ${progress.totalCards}`;
   els.openPackButton.disabled = user.journey.dailyDrawChances <= 0;
   els.packHintText.textContent = user.journey.dailyDrawChances > 0
@@ -1501,23 +1766,39 @@ function renderJourneyScreen() {
 }
 
 function renderSolarRealmMap(user) {
-  els.solarRealmMap.innerHTML = solarScienceCards.map((card, index) => {
-    const entry = user.cardCollection[card.id];
-    const unlocked = Boolean(entry?.owned);
-    const active = state.recentLightNodeId === card.lightNodeId ? " is-new-light" : "";
+  els.solarRealmMap.innerHTML = scienceRealms.map((realm) => {
+    const progress = user.realmProgress[realm.id];
     return `
-      <button class="solar-node realm-node ${unlocked ? "unlocked" : "locked"} ${card.rarity.toLowerCase()}${active}" type="button" data-card-id="${card.id}" style="--node-index: ${index}">
-        <span class="realm-node-core">${unlocked ? renderCelestialThumb(card) : "?"}</span>
-        <strong>${card.nameZh}</strong>
-        <small>${getRarityCode(card.rarity)} · ${card.cardNo}</small>
-      </button>
+      <section class="realm-map-group realm-map-group-${realm.id}">
+        <div class="realm-map-heading">
+          <div>
+            <p class="eyebrow">${realm.labelEn}</p>
+            <h3>${realm.labelEn} ${realm.labelZh}</h3>
+          </div>
+          <strong>${progress.unlockedCards} / ${progress.totalCards}</strong>
+        </div>
+        <div class="realm-node-track">
+          ${realm.cards.map((card, index) => {
+            const entry = user.cardCollection[card.id];
+            const unlocked = Boolean(entry?.owned);
+            const active = state.recentLightNodeId === card.lightNodeId ? " is-new-light" : "";
+            return `
+              <button class="solar-node realm-node ${unlocked ? "unlocked" : "locked"} ${card.rarity.toLowerCase()}${active}" type="button" data-card-id="${card.id}" style="--node-index: ${index}">
+                <span class="realm-node-core">${unlocked ? renderCelestialThumb(card) : "?"}</span>
+                <strong>${card.nameZh}</strong>
+                <small>${getRarityCode(card.rarity)} · ${card.cardNo}</small>
+              </button>
+            `;
+          }).join("")}
+        </div>
+      </section>
     `;
   }).join("");
 }
 
 function renderScienceCardGrid(user) {
   const filter = state.selectedRarityFilter;
-  els.scienceCardGrid.innerHTML = solarScienceCards
+  els.scienceCardGrid.innerHTML = allScienceCards
     .filter((card) => filter === "All" || card.rarity === filter)
     .map((card) => {
       const entry = user.cardCollection[card.id];
@@ -1532,7 +1813,7 @@ function renderScienceCardFace(card, entry, unlocked, options = {}) {
   const compactClass = options.compact ? " is-compact" : "";
   const ownedClass = unlocked ? "is-owned" : "is-unknown";
   const title = unlocked ? `${card.nameZh} ${card.name}` : "Unknown Celestial File";
-  const subtitle = unlocked ? `${card.category} · Solar Realm` : "Solar Realm Collection";
+  const subtitle = unlocked ? `${card.category} · ${getRealmLabel(card.realmId)}` : getRealmDefinition(card.realmId).collectionName;
   const intro = unlocked ? card.scienceIntro : `尚未点亮 ${card.nameZh} 的星体档案。开启科学星光包，解锁这份宇宙科学档案。`;
   const ideas = unlocked ? card.keyIdeas.slice(0, options.compact ? 3 : 4) : ["未发现", "科学档案", "等待点亮"];
   const imageMarkup = unlocked ? renderCelestialImage(card) : `<span class="planet-fallback">◎</span>`;
@@ -1570,7 +1851,7 @@ function renderScienceCardFace(card, entry, unlocked, options = {}) {
 function renderCardBackMini() {
   return `
     <div class="card-back-mini">
-      <span>Solar</span>
+      <span>Stellar</span>
       <strong>Science Cards</strong>
       <em>My Stellar Journey</em>
     </div>
@@ -1645,7 +1926,7 @@ function showPackChoice() {
     <div class="pack-choice-scene">
       <p class="eyebrow">Start a Science Discovery</p>
       <h2 id="packResultTitle">选择一张科学星光卡</h2>
-      <p>三张卡背后连接同一个太阳星域星光包。选中一张，开启你的宇宙科学档案。</p>
+      <p>三张卡背后连接同一个科学星域星光包。选中一张，开启你的宇宙科学档案。</p>
       <div class="pack-choice-grid" aria-label="选择科学星光包中的一张卡">
         ${[0, 1, 2].map((index) => `
           <button class="pack-choice-card" type="button" data-pack-choice="${index + 1}" style="--choice-index: ${index}">
@@ -1663,7 +1944,7 @@ function renderScienceCardBack(index) {
   return `
     <span class="choice-card-back">
       <i></i>
-      <strong>Solar<br>Science<br>Cards</strong>
+      <strong>Stellar<br>Science<br>Cards</strong>
       <em>My Stellar Journey</em>
       <small>Discovery ${index}</small>
     </span>
@@ -1740,10 +2021,10 @@ function pickWeightedRarity(table) {
 }
 
 function pickWeightedCardByRarity(user, rarity) {
-  const pool = solarScienceCards.filter((card) => card.rarity === rarity);
+  const pool = allScienceCards.filter((card) => card.rarity === rarity);
   const weighted = pool.map((card) => {
     const owned = Boolean(user.cardCollection[card.id]?.owned);
-    const unownedCount = solarScienceCards.filter((item) => !user.cardCollection[item.id]?.owned).length;
+    const unownedCount = allScienceCards.filter((item) => !user.cardCollection[item.id]?.owned).length;
     return { card, weight: owned ? 1 : (unownedCount >= 5 ? 4 : 2.5) };
   });
   const total = weighted.reduce((sum, item) => sum + item.weight, 0);
@@ -1761,7 +2042,7 @@ function showPackResult(result, choiceNumber = "") {
     <div class="pack-result-heading">
       <p class="eyebrow">${choiceNumber ? `Discovery ${choiceNumber} · ` : ""}${isNew ? "New Discovery! 新发现一个宇宙知识点！" : "Science File Upgraded 科学档案升级"}</p>
       <h2 id="packResultTitle">${isNew ? "Celestial Archive Activated 星体档案已点亮" : "星体研究进度提升"}</h2>
-      <p>${isNew ? "太阳星域地图中对应节点已经点亮。" : `转化为星尘 +${dustGained}，科学档案研究等级提升。`}</p>
+      <p>${isNew ? "科学星域地图中对应节点已经点亮。" : `转化为星尘 +${dustGained}，科学档案研究等级提升。`}</p>
     </div>
     <div class="drawn-card-wrap">
       ${renderScienceCardFace(card, entry, true, { compact: false, asButton: false })}
@@ -1784,7 +2065,7 @@ function handleSolarMapPreview(event) {
   const node = event.target.closest("[data-card-id]");
   if (!node) return;
   const user = getCurrentUser();
-  const card = getSolarCard(node.dataset.cardId);
+  const card = getScienceCard(node.dataset.cardId);
   const owned = Boolean(user?.cardCollection?.[card.id]?.owned);
   els.mapPreview.innerHTML = owned
     ? `<strong>${card.fallbackIcon ?? "✦"} ${card.nameZh}</strong><span>${getRarityCode(card.rarity)} · ${card.cardNo} · ${card.category} · Science Power ${card.sciencePower}</span>`
@@ -1807,7 +2088,7 @@ function handleScienceCardGridClick(event) {
 
 function showScienceCardDetail(cardId) {
   const user = getCurrentUser();
-  const card = getSolarCard(cardId);
+  const card = getScienceCard(cardId);
   const entry = user?.cardCollection?.[cardId];
   const owned = Boolean(entry?.owned);
   els.scienceCardDetail.innerHTML = `
@@ -1816,7 +2097,7 @@ function showScienceCardDetail(cardId) {
         ${renderScienceCardFace(card, entry, owned, { compact: false, asButton: false })}
       </div>
       <div class="detail-science-file">
-        <p class="eyebrow">Solar Science Cards · ${getRarityCode(card.rarity)} · ${card.cardNo}</p>
+        <p class="eyebrow">${getRealmDefinition(card.realmId).labelEn} Science Cards · ${getRarityCode(card.rarity)} · ${card.cardNo}</p>
         <h2 id="cardDetailTitle">${owned ? `${card.nameZh} / ${card.name}` : "Locked Science Card"}</h2>
         <strong>${card.category} · ${getRarityCode(card.rarity)} · ${card.cardNo}</strong>
         <p>${owned ? card.scienceIntro : `尚未点亮 ${card.nameZh} 的星体档案。完成练习获得探索机会，开启科学星光包来发现它。`}</p>
@@ -1837,8 +2118,12 @@ function closeScienceCardModal() {
   els.scienceCardModal.classList.add("hidden");
 }
 
+function getScienceCard(cardId) {
+  return allScienceCards.find((card) => card.id === cardId) ?? allScienceCards[0];
+}
+
 function getSolarCard(cardId) {
-  return solarScienceCards.find((card) => card.id === cardId) ?? solarScienceCards[0];
+  return getScienceCard(cardId);
 }
 
 function formatDateTime(value) {
