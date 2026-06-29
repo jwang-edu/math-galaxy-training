@@ -35,6 +35,12 @@ const drawRarityTable = [
   { rarity: "Legendary", weight: 5 },
 ];
 
+const cardOwnershipWeights = {
+  owned: 1,
+  unowned: 6,
+  lastUnowned: 10,
+};
+
 function getRarityCode(rarity) {
   switch (rarity) {
     case "Common":
@@ -495,6 +501,26 @@ function getTotalRealmProgress(user) {
     return sum;
   }, { unlockedCards: 0, totalCards: 0 });
   return { ...totals, completed: totals.totalCards > 0 && totals.unlockedCards >= totals.totalCards };
+}
+
+function getUnownedCardsForRealm(user, realmId) {
+  return getCardsForRealm(realmId).filter((card) => !user.cardCollection?.[card.id]?.owned);
+}
+
+function getSolarCardsRemaining(user) {
+  return getUnownedCardsForRealm(user, "solar_realm").length;
+}
+
+function isZodiacRealmUnlocked(user) {
+  return getSolarCardsRemaining(user) <= 3;
+}
+
+function getAvailableScienceRealmsForDraw(user) {
+  return scienceRealms.filter((realm) => realm.id === "solar_realm" || isZodiacRealmUnlocked(user));
+}
+
+function getAvailableScienceCardsForDraw(user) {
+  return getAvailableScienceRealmsForDraw(user).flatMap((realm) => realm.cards);
 }
 
 function makeTwoDigitAddition(withCarry) {
@@ -1757,9 +1783,13 @@ function renderJourneyScreen() {
   els.solarProgressBadge.textContent = progress.completed
     ? "全部科学图鉴完成"
     : `${progress.unlockedCards} / ${progress.totalCards}`;
+  const solarRemaining = getSolarCardsRemaining(user);
+  const zodiacUnlocked = isZodiacRealmUnlocked(user);
   els.openPackButton.disabled = user.journey.dailyDrawChances <= 0;
   els.packHintText.textContent = user.journey.dailyDrawChances > 0
-    ? `还有 ${user.journey.dailyDrawChances} 次科学星光探索机会。`
+    ? (zodiacUnlocked
+      ? `黄道星域卡包已开启：太阳星域和黄道星域会同时出现。还有 ${user.journey.dailyDrawChances} 次探索机会。`
+      : `太阳星域还剩 ${solarRemaining} 张未点亮；剩 3 张时开启黄道星域卡包。还有 ${user.journey.dailyDrawChances} 次探索机会。`)
     : "完成练习获得更多探索机会";
   renderSolarRealmMap(user);
   renderScienceCardGrid(user);
@@ -1922,15 +1952,27 @@ function handleOpenPack() {
 }
 
 function showPackChoice() {
+  const user = getCurrentUser();
+  if (!user) return;
+  const zodiacUnlocked = isZodiacRealmUnlocked(user);
+  const packBacks = zodiacUnlocked
+    ? [
+      { realmId: "solar_realm", label: "Solar Pack", name: "太阳星域" },
+      { realmId: "zodiac_realm", label: "Zodiac Pack", name: "黄道星域" },
+      { realmId: "mixed_realm", label: "Dual Realm", name: "双星域" },
+    ]
+    : [0, 1, 2].map(() => ({ realmId: "solar_realm", label: "Solar Pack", name: "太阳星域" }));
   els.packResultContent.innerHTML = `
     <div class="pack-choice-scene">
       <p class="eyebrow">Start a Science Discovery</p>
       <h2 id="packResultTitle">选择一张科学星光卡</h2>
-      <p>三张卡背后连接同一个科学星域星光包。选中一张，开启你的宇宙科学档案。</p>
+      <p>${zodiacUnlocked
+        ? "黄道星域卡包已开启。太阳星域与黄道星域的卡会同时进入本次探索。"
+        : `继续探索太阳星域。当前还剩 ${getSolarCardsRemaining(user)} 张未点亮；剩 3 张时开启黄道星域卡包。`}</p>
       <div class="pack-choice-grid" aria-label="选择科学星光包中的一张卡">
-        ${[0, 1, 2].map((index) => `
+        ${packBacks.map((pack, index) => `
           <button class="pack-choice-card" type="button" data-pack-choice="${index + 1}" style="--choice-index: ${index}">
-            ${renderScienceCardBack(index + 1)}
+            ${renderScienceCardBack(index + 1, pack)}
           </button>
         `).join("")}
       </div>
@@ -1940,12 +1982,12 @@ function showPackChoice() {
   els.packResultModal.classList.remove("hidden");
 }
 
-function renderScienceCardBack(index) {
+function renderScienceCardBack(index, pack = { realmId: "solar_realm", label: "Solar Pack", name: "太阳星域" }) {
   return `
-    <span class="choice-card-back">
+    <span class="choice-card-back pack-back-${pack.realmId}">
       <i></i>
-      <strong>Stellar<br>Science<br>Cards</strong>
-      <em>My Stellar Journey</em>
+      <strong>${pack.label.replace(" ", "<br>")}<br>Cards</strong>
+      <em>${pack.name} · My Stellar Journey</em>
       <small>Discovery ${index}</small>
     </span>
   `;
@@ -1975,12 +2017,13 @@ function drawSolarScienceCard(user) {
   initializeJourneyData(user);
   user.journey.dailyDrawChances -= 1;
   user.journey.totalDraws += 1;
+  const availableCards = getAvailableScienceCardsForDraw(user);
   const forceHighRarity = user.journey.pityCounter >= 9;
   const rarity = forceHighRarity ? pickWeightedRarity([
     { rarity: "Epic", weight: 80 },
     { rarity: "Legendary", weight: 20 },
   ]) : pickWeightedRarity(drawRarityTable);
-  const card = pickWeightedCardByRarity(user, rarity);
+  const card = pickWeightedCardByRarity(user, rarity, availableCards);
   const entry = user.cardCollection[card.id];
   const isNew = !entry?.owned;
   let dustGained = 0;
@@ -2020,12 +2063,19 @@ function pickWeightedRarity(table) {
   return table[table.length - 1].rarity;
 }
 
-function pickWeightedCardByRarity(user, rarity) {
-  const pool = allScienceCards.filter((card) => card.rarity === rarity);
+function pickWeightedCardByRarity(user, rarity, availableCards = allScienceCards) {
+  const rarityPool = availableCards.filter((card) => card.rarity === rarity);
+  const pool = rarityPool.length > 0 ? rarityPool : availableCards;
+  const unownedCount = availableCards.filter((item) => !user.cardCollection[item.id]?.owned).length;
   const weighted = pool.map((card) => {
     const owned = Boolean(user.cardCollection[card.id]?.owned);
-    const unownedCount = allScienceCards.filter((item) => !user.cardCollection[item.id]?.owned).length;
-    return { card, weight: owned ? 1 : (unownedCount >= 5 ? 4 : 2.5) };
+    const unownedWeight = unownedCount <= 3
+      ? cardOwnershipWeights.lastUnowned
+      : cardOwnershipWeights.unowned;
+    return {
+      card,
+      weight: owned ? cardOwnershipWeights.owned : unownedWeight,
+    };
   });
   const total = weighted.reduce((sum, item) => sum + item.weight, 0);
   let roll = Math.random() * total;
